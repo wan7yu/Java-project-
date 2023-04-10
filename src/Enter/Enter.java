@@ -37,6 +37,7 @@ public class Enter {
         }
     }
 
+
     public void EnterPeople() {
         System.out.println("开始录入人员!提示:输入编号为-1时结束录入");
         Scanner reader = new Scanner(System.in);
@@ -74,6 +75,7 @@ public class Enter {
             peoples = new People[nums + 1];
             peoples[nums] = people;
             nums = nums + 1;
+            System.out.println();
         }
     }
 }
