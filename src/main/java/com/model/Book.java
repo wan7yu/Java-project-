@@ -1,18 +1,20 @@
 package LibMangeSystem.src.main.java.com.model;
 
+import java.time.*;
+
 public class Book {
     private String bookTitle;
     private String author;
     private String press;
     private int status;
-    private String borTime;
+    private LocalDateTime curTime;
 
-    public void setBook(String bookTitle, String author, String press, int status, String borTime) {
+    public void setBook(String bookTitle, String author, String press, int status, LocalDateTime curTime) {
         this.bookTitle = bookTitle;
         this.author = author;
         this.press = press;
         this.status = status;
-        this.borTime = borTime;
+        this.borTime = curTime;
     }
 
     public String getBookTitle() {
@@ -31,7 +33,7 @@ public class Book {
         return this.status;
     }
 
-    public String getBorTime() {
-        return this.borTime;
+    public LocalDateTime getBorTime() {
+        return this.curTime;
     }
 }

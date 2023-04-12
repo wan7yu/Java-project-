@@ -1,9 +1,8 @@
 package LibMangeSystem.src.main.java.com.service;
 
-import LibMangeSystem.src.main.java.Setting;
-
-import java.net.URL;
 import java.sql.*;
+import java.time.*;
+import LibMangeSystem.src.mian.java.Setting;
 
 public class EntryPeople {
     public void entry() {
@@ -19,16 +18,19 @@ public class EntryPeople {
             Class.forName(jdbcDriver);
             // 打开链接
             System.out.println("连接数据库...");
-            Connection conn = DriverManager.getConnection(dbUrl, user, password);
+            conn = DriverManager.getConnection(dbUrl, user, password);
 
             // 执行查询
             // 实例化Statement对象...
             Statement stmt = conn.createStatement();
-            int stuId = 0;
-            String name = null;
+            int stuId = 1;
+            String name = "王烨";
             int borNum = 0;
-            String borTime = null;
-            String endTime = null;
+            LocalTime nowTime = LocalTime.now();
+            LocalDate nowDate = LocalDate.now();
+            LocalDate endDate = nowDate.plusDays(120);
+            LocalDateTime borTime = nowTime.atDate(nowDate);
+            LocalDateTime endTime = nowTime.atDate(endDate);
             String sql = "INSERT INTO student(stuId,name,borNum,borTime,endTime) VALUES(?, ?, ?)";
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, stuId);
