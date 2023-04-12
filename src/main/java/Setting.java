@@ -1,4 +1,4 @@
-package mian.java;
+package LibMangeSystem.src.main.java;
 
 public class Setting {
     public static String[] getMySql() {

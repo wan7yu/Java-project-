@@ -1,8 +1,9 @@
-package mian.java.com.service;
+package LibMangeSystem.src.main.java.com.service;
+
+import LibMangeSystem.src.main.java.Setting;
 
 import java.net.URL;
 import java.sql.*;
-import mian.java.Setting;;
 
 public class EntryPeople {
     public void entry() {
