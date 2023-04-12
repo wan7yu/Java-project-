@@ -8,4 +8,12 @@ public class BorBook {
         this.bookId = bookId;
         this.stuId = stuId;
     }
+
+    public int getBookId() {
+        return this.bookId;
+    }
+
+    public int getStuId() {
+        return this.stuId;
+    }
 }
