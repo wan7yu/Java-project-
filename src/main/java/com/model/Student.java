@@ -1,13 +1,15 @@
 package LibMangeSystem.src.main.java.com.model;
 
+import java.time.*;
+
 public class Student {
     private int stuId;
     private String name;
     private int borNum;
-    private String borTime;
-    private String endTime;
+    private LocalDateTime borTime;
+    private LocalDateTime endTime;
 
-    public void setBook(int stuId, String name, int borNum, String borTime, String endTime) {
+    public void setBook(int stuId, String name, int borNum, LocalDateTime borTime, LocalDateTime endTime) {
         this.stuId = stuId;
         this.name = name;
         this.borNum = borNum;
@@ -27,11 +29,11 @@ public class Student {
         return this.borNum;
     }
 
-    public String getBorTime() {
+    public LocalDateTime getBorTime() {
         return this.borTime;
     }
 
-    public String getBorEndTime() {
+    public LocalDateTime getBorEndTime() {
         return this.endTime;
     }
 }
