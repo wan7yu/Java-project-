@@ -14,7 +14,7 @@ public class Book {
         this.author = author;
         this.press = press;
         this.status = status;
-        this.borTime = curTime;
+        this.curTime = curTime;
     }
 
     public String getBookTitle() {
