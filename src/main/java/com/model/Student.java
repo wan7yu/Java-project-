@@ -1,4 +1,4 @@
-package mian.java.com.model;
+package LibMangeSystem.src.main.java.com.model;
 
 public class Student {
     private int stuId;
