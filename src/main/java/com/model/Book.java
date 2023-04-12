@@ -9,13 +9,13 @@ public class Book {
 
     public void setBook(String bookTitle, String author, String press, int status, String borTime) {
         this.bookTitle = bookTitle;
-        this.autor = autor;
+        this.author = author;
         this.press = press;
         this.status = status;
         this.borTime = borTime;
     }
 
-    public int getBookTitle() {
+    public String getBookTitle() {
         return this.bookTitle;
     }
 
@@ -23,11 +23,11 @@ public class Book {
         return this.author;
     }
 
-    public int getPress() {
+    public String getPress() {
         return this.press;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return this.status;
     }
 
