@@ -14,4 +14,24 @@ public class Student {
         this.borTime = borTime;
         this.endTime = endTime;
     }
+
+    public int getStuId() {
+        return this.stuId;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public int getBorNum() {
+        return this.borNum;
+    }
+
+    public String getBorTime() {
+        return this.borTime;
+    }
+
+    public String getBorEndTime() {
+        return this.endTime;
+    }
 }
