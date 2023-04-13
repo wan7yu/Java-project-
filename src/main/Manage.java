@@ -1,6 +1,5 @@
 package LibMangeSystem.src.main;
 
-
 import LibMangeSystem.src.main.java.com.views.Enter;
 
 public class Manage {
