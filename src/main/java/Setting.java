@@ -1,9 +1,9 @@
-package LibMangeSystem.src.main.java;
+package main.java;
 
 public class Setting {
     public static String[] getMySql() {
         String jdbcDriver = "com.mysql.cj.jdbc.Driver";
-        String dbUrl = "jdbc:mysql://121.40.48.93/BookManage";
+        String dbUrl = "jdbc:mysql://121.40.48.93/bookManage";
         String user = "abc";
         String password = "123456";
         String[] mysqlSet = new String[4];
