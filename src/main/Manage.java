@@ -1,10 +1,10 @@
 package main;
 
-import main.java.com.service.*;
+import main.java.com.views.*;
 
 public class Manage {
     public static void main(String[] args) {
-        EntryPeople people = new EntryPeople();
-        System.out.println(people.entryStundet());
+        Enter menu = new Enter();
+        menu.enterStudent();
     }
 }
