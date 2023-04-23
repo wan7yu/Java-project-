@@ -14,37 +14,51 @@ public class Enter {
         // 创建一个窗口
         JFrame windows = new JFrame("图书管理系统");
         // 创建一个面板
-        JPanel panel = new JPanel();
+        JPanel bodyJPanel = new JPanel();
+        JPanel bottomPanel = new JPanel();
+        // 创建菜单
+        JMenuBar jMenuBar = new JMenuBar();
+        JMenu bookQueryMenu = new JMenu("图书查询");
+        JMenu stuQueryMenu = new JMenu("借书人员查询");
+        JMenu bookEnterMenu = new JMenu("图书录入");
+        JMenu stuEnterMenu = new JMenu("人员录入");
+        jMenuBar.add(bookQueryMenu);
+        jMenuBar.add(stuQueryMenu);
+        jMenuBar.add(bookEnterMenu);
+        jMenuBar.add(stuEnterMenu);
         // 设置垂直
-        BoxLayout layout = new BoxLayout(panel, BoxLayout.Y_AXIS);
-        panel.setLayout(layout);
+        BoxLayout layout = new BoxLayout(bodyJPanel, BoxLayout.Y_AXIS);
+        bodyJPanel.setLayout(layout);
         // 设置文本输入框
-        JTextField test1 = new JTextField(20);
-        JTextField test2 = new JTextField(20);
-        JTextField test3 = new JTextField(20);
+        JTextField stuIdField = new JTextField(10);
+        JTextField nameField = new JTextField(10);
+        JTextField borNumField = new JTextField(10);
         //
-        JLabel label1 = new JLabel("学号");
-        JLabel label2 = new JLabel("姓名");
-        JLabel label3 = new JLabel("借阅数量");
+        JLabel stuJLabel = new JLabel("学号");
+        JLabel nameJLabel = new JLabel("姓名");
+        JLabel borNumJLabel = new JLabel("借阅数量");
         // 设置按钮
         JButton button1 = new JButton("取消");
         JButton button2 = new JButton("确认");
         // 添加组件
-        panel.add(label1);
-        panel.add(test1);
-        panel.add(label2);
-        panel.add(test2);
-        panel.add(label3);
-        panel.add(test3);
-        panel.add(button1);
-        panel.add(button2);
+        bodyJPanel.add(stuJLabel);
+        bodyJPanel.add(stuIdField);
+        bodyJPanel.add(nameJLabel);
+        bodyJPanel.add(nameField);
+        bodyJPanel.add(borNumJLabel);
+        bodyJPanel.add(borNumField);
+        bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.LINE_AXIS));
+        bottomPanel.add(Box.createHorizontalGlue());
+        bottomPanel.add(button1);
+        bottomPanel.add(Box.createRigidArea(new Dimension(10, 0)));
+        bottomPanel.add(button2);
         // 绑定事件
         button2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // 获取文本框信息
-                String stuId = test1.getText();
-                String name = test2.getText();
-                String borNum = test3.getText();
+                String stuId = stuIdField.getText();
+                String name = nameField.getText();
+                String borNum = borNumField.getText();
                 // 获取借书时间
                 LocalTime nowTime = LocalTime.now();
                 LocalDate nowDate = LocalDate.now();
@@ -61,13 +75,15 @@ public class Enter {
                     System.out.println("添加失败");
                 }
                 // 清空文本框
-                test1.setText("");
-                test2.setText("");
-                test3.setText("");
+                stuIdField.setText("");
+                nameField.setText("");
+                borNumField.setText("");
             }
         });
-        windows.add(panel, BorderLayout.CENTER);
-        windows.setSize(400, 300);
+        windows.setJMenuBar(jMenuBar);
+        windows.add(bodyJPanel, BorderLayout.CENTER);
+        windows.add(bottomPanel, BorderLayout.SOUTH);
+        windows.setSize(400, 350);
         windows.setLocationRelativeTo(null);
         windows.setTitle("借书学生信息录入");
         windows.setVisible(true);

@@ -16,30 +16,30 @@ public class Menu {
         panel.setBorder(BorderFactory.createEmptyBorder(50, 50, 50, 50));
 
         // 创建按钮
-        JButton button1 = new JButton("图书查询");
-        JButton button2 = new JButton("借书人员查询");
-        JButton button3 = new JButton("图书录入");
-        JButton button4 = new JButton("人员录入");
+        JButton bookQuery = new JButton("图书查询");
+        JButton stuQuery = new JButton("借书人员查询");
+        JButton bookEnter = new JButton("图书录入");
+        JButton stuEnter = new JButton("人员录入");
         // 设置按钮最大大小
         Dimension buttonSize = new Dimension(200, 50);
-        button1.setMaximumSize(buttonSize);
-        button2.setMaximumSize(buttonSize);
-        button3.setMaximumSize(buttonSize);
-        button4.setMaximumSize(buttonSize);
+        bookQuery.setMaximumSize(buttonSize);
+        stuQuery.setMaximumSize(buttonSize);
+        bookEnter.setMaximumSize(buttonSize);
+        stuEnter.setMaximumSize(buttonSize);
         // 设置按钮大小
-        button1.setPreferredSize(buttonSize);
-        button2.setPreferredSize(buttonSize);
-        button3.setPreferredSize(buttonSize);
-        button4.setPreferredSize(buttonSize);
+        bookQuery.setPreferredSize(buttonSize);
+        stuQuery.setPreferredSize(buttonSize);
+        bookEnter.setPreferredSize(buttonSize);
+        stuEnter.setPreferredSize(buttonSize);
         // 往面板中加按钮
         panel.add(Box.createVerticalGlue());
-        panel.add(button1);
+        panel.add(bookQuery);
         panel.add(Box.createVerticalStrut(10));
-        panel.add(button2);
+        panel.add(stuQuery);
         panel.add(Box.createVerticalStrut(10));
-        panel.add(button3);
+        panel.add(bookEnter);
         panel.add(Box.createVerticalStrut(10));
-        panel.add(button4);
+        panel.add(stuEnter);
         panel.add(Box.createVerticalGlue());
         // 往窗口添加容器
         windows.add(panel, BorderLayout.CENTER);
