@@ -2,8 +2,12 @@ package main.java.com.views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Query {
+import main.java.com.service.Inquire;
+
+public class ViewsQuery {
     public static void bookQuery() {
         // 创建菜单
         JMenuBar jMenuBar = new JMenuBar();
@@ -17,35 +21,34 @@ public class Query {
         jMenuBar.add(bookEnterMenu);
         jMenuBar.add(stuEnterMenu);
         // 创建表格数据
-        Object[][] bookData = {
-                { "Java编程思想", "Bruce Eckel", "机械工业出版社", "2007-06-01" },
-                { "Java核心技术", "Cay S. Horstmann, Gary Cornell", "机械工业出版社", "2013-09-01" },
-                { "Effective Java", "Joshua Bloch", "机械工业出版社", "2018-08-01" },
-                { "深入浅出设计模式", "程杰", "电子工业出版社", "2014-11-01" },
-                { "Head First 设计模式", "Eric Freeman, Elisabeth Robson", "中国电力出版社", "2011-01-01" }
-        };
+        Inquire query = new Inquire();
+        String[][] data = query.borStudentQuery();
         // 创建表格的表头
-        String[] columnNames = { "书名", "作者", "出版社", "出版日期" };
-
+        String[] columnNames = { "学号", "姓名", "借阅书籍名称", "借阅时间" };
         // 创建一个表格，并设置表格数据和表头
-        JTable table = new JTable(bookData, columnNames);
+        JTable table = new JTable(data, columnNames);
 
         // 将表格添加到一个滚动面板中，并设置滚动面板的尺寸和布局
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setPreferredSize(new Dimension(500, 300));
         scrollPane.setLayout(new ScrollPaneLayout());
         // 设置按钮
-        JButton button1 = new JButton("取消");
-        JButton button2 = new JButton("确认");
+        JButton cancel = new JButton("取消");
+        JButton confirm = new JButton("确认");
+        confirm.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "您当前的操作有风险，您确定要继续吗？", "确认", JOptionPane.PLAIN_MESSAGE);
+            }
+        });
         // 创建面板
         JPanel bottomPanel = new JPanel();
         // 设置面板布局
         bottomPanel.setLayout(new BoxLayout(bottomPanel, BoxLayout.LINE_AXIS));
         // 添加面板组件
         bottomPanel.add(Box.createHorizontalGlue());
-        bottomPanel.add(button1);
+        bottomPanel.add(cancel);
         bottomPanel.add(Box.createRigidArea(new Dimension(10, 0)));
-        bottomPanel.add(button2);
+        bottomPanel.add(confirm);
         // 创建一个窗口
         JFrame windows = new JFrame("图书管理系统");
         // 往窗口添加组件
@@ -57,5 +60,9 @@ public class Query {
         windows.setTitle("图书查询");
         windows.setVisible(true);
         windows.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void studentQuery() {
+
     }
 }
