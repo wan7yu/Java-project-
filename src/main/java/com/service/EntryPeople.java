@@ -6,22 +6,34 @@ import java.time.*;
 import main.java.Setting;
 
 public class EntryPeople {
-    private static Connection conn = Setting.conMySql();
+    private String[] mysqlset = Setting.getMySql();
+    private String jdbcDriver = mysqlset[0];
+    private String dbUrl = mysqlset[1];
+    private String user = mysqlset[2];
+    private String password = mysqlset[3];
 
-    public static Boolean entryBorBook(int bookId, int stuId, LocalDateTime curTime) {
+    public Boolean entryBorBook() {
+        Connection conn = null;
         PreparedStatement pstmt = null;
         int rows = 0;
         try {
-            String sql = "INSERT INTO student(bookId,stuId,curTime) VALUES(?,?,?)";
+            // 注册 JDBC 驱动
+            Class.forName(jdbcDriver);
+            // 打开链接
+            conn = DriverManager.getConnection(dbUrl, user, password);
+            int stuId = 1;
+            int bookId = 1;
+            String sql = "INSERT INTO student(bookId,stuId) VALUES(?,?)";
             // 开始录入
             pstmt = conn.prepareStatement(sql);
             pstmt.setInt(1, bookId);
-            pstmt.setInt(2, stuId);
-            pstmt.setObject(3, curTime);
+            pstmt.setInt(1, stuId);
             rows = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         // 判断是否录入成功
@@ -32,11 +44,26 @@ public class EntryPeople {
         }
     }
 
-    public static Boolean entryStundet(int stuId, String name, int borNum, LocalDateTime borTime,
-            LocalDateTime endTime) {
+    public Boolean entryStundet() {
+        Connection conn = null;
         PreparedStatement pstmt = null;
         int rows = 0;
         try {
+            // 注册 JDBC 驱动
+            Class.forName(jdbcDriver);
+            // 打开链接
+            conn = DriverManager.getConnection(dbUrl, user, password);
+
+            // 执行查询
+            // 实例化Statement对象...
+            int stuId = 1;
+            String name = "王朋";
+            int borNum = 0;
+            LocalTime nowTime = LocalTime.now();
+            LocalDate nowDate = LocalDate.now();
+            LocalDate endDate = nowDate.plusDays(120);
+            LocalDateTime borTime = nowTime.atDate(nowDate);
+            LocalDateTime endTime = nowTime.atDate(endDate);
             String sql = "INSERT INTO student(stuId,name,borNum,borTime,endTime) VALUES(?,?,?,?,?)";
             // 开始录入
             pstmt = conn.prepareStatement(sql);
@@ -50,6 +77,8 @@ public class EntryPeople {
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
         // 判断是否录入成功
         if (rows > 0) {
@@ -59,12 +88,17 @@ public class EntryPeople {
         }
     }
 
-    public static Boolean query() {
+    public Boolean query() {
+        Connection conn = null;
         ResultSet students = null;
         ResultSet borBooks = null;
         ResultSet bookTitles = null;
         int[] books = null;
         try {
+            // 注册 JDBC 驱动
+            Class.forName(jdbcDriver);
+            // 打开链接
+            conn = DriverManager.getConnection(dbUrl, user, password);
             Statement sql = conn.createStatement();
             students = sql.executeQuery("SELECT stuId,name,borNum,borTime,endTime FROM student;");
             while (students.next()) {
@@ -91,6 +125,8 @@ public class EntryPeople {
             }
             students.close();
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return true;
