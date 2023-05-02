@@ -1,56 +1,43 @@
 package LibMangeSystem.src.main.java.com.service;
 
+import main.java.Setting;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.sql.*;
 
-import LibMangeSystem.src.main.java.Setting;
+import java.time.*;
+
+
 import LibMangeSystem.src.main.java.com.model.Book;
 import LibMangeSystem.src.main.java.com.model.BorBook;
 
+import javax.swing.*;
+
 public class EnterBook {
-    public void enterBook() {
-        // 这里是连接数据库的操作
-        String[] mysqlset = main.java.Setting.getMySql();
-        String jdbcDriver = mysqlset[0];
-        String dbUrl = mysqlset[1];
-        String user = mysqlset[2];
-        String password = mysqlset[3];
-        Connection conn = null;
+    private static Connection conn = Setting.conMySql();
+    public static boolean entryBook(String bookTitle,String author,String press) {
         PreparedStatement pstmt = null;
-        try {
-            Class.forName(jdbcDriver);
-            System.out.println("连接数据库...");
-            conn = DriverManager.getConnection(dbUrl, user, password);
-
-            Statement stmt = conn.createStatement();
-            String title = null;
-            String author = null;
-            String press = null;
-            int status = 0;
-            Date curTime = null;
-            String sql = "INSERT INTO book(bookTitle,author,press,status,curTime) Values(?,?,?,?,?)";
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, title);
-            pstmt.setString(2, author);
-            pstmt.setString(3, press);
-            pstmt.setInt(4, status);
-            pstmt.setDate(5, curTime);
-
-            int rows = pstmt.executeUpdate();
-            System.out.println("插入了" + rows + "数据行");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } finally {
-            try {
-                if (pstmt != null)
-                    pstmt.close();
-                if (conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        // 判断传来的参数是否为空
+        if (bookTitle.isEmpty()||author.isEmpty()||press.isEmpty()){
+            return false;
         }
-    }
+        int rows = 0;
+        try {
+            String sql = "INSERT INTO book(bookTitle,author,press,status) VALUES(?,?,?,?)";
+            // 开始录入
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setString(1,bookTitle);
+            pstmt.setString(2,author);
+            pstmt.setString(3,press);
+            pstmt.setInt(4,0);
+            rows = pstmt.executeUpdate();
+            pstmt.close();
+            conn.close();
 
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return rows > 0;
+    }
 }

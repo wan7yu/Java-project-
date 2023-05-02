@@ -1,10 +1,11 @@
-package main;
+package LibMangeSystem.src.main;
 
-import main.java.com.service.*;
+
+import LibMangeSystem.src.main.java.com.views.Enter;
 
 public class Manage {
     public static void main(String[] args) {
-        EntryPeople people = new EntryPeople();
-        System.out.println(people.entryStundet());
+        Enter menu = new Enter();
+        menu.enterStudent();
     }
 }

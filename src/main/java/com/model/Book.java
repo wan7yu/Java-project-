@@ -1,6 +1,7 @@
 package LibMangeSystem.src.main.java.com.model;
 
-import java.time.*;
+import java.sql.Date;
+import java.time.LocalDateTime;
 
 public class Book {
     private String bookTitle;
@@ -29,11 +30,11 @@ public class Book {
         return this.press;
     }
 
-    public int getStatus() {
-        return this.status;
+    public String getStatus() {
+        return String.valueOf(this.status);
     }
 
-    public LocalDateTime getBorTime() {
-        return this.curTime;
+    public String getBorTime() {
+        return String.valueOf(this.curTime);
     }
 }
