@@ -3,21 +3,22 @@ package LibMangeSystem.src.main.java.com.service;
 import java.sql.*;
 import java.time.*;
 
+import main.java.com.model.BorBook;
 import main.java.Setting;
 
 public class EntryPeople {
     private Connection conn = Setting.conMySql();
 
-    public Boolean entryBorBook(int bookId, int stuId, LocalDateTime curTime) {
+    public Boolean entryBorBook(BorBook borBook) {
         PreparedStatement pstmt = null;
         int rows = 0;
         try {
             String insertSql = "INSERT INTO student(bookId,stuId,curTime) VALUES(?,?,?)";
             // 开始录入
             pstmt = conn.prepareStatement(insertSql);
-            pstmt.setInt(1, bookId);
-            pstmt.setInt(2, stuId);
-            pstmt.setObject(3, curTime);
+            pstmt.setInt(1, borBook.getBookId());
+            pstmt.setInt(2, borBook.getStuId());
+            pstmt.setObject(3, borBook.getCurTime());
             rows = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -32,19 +33,18 @@ public class EntryPeople {
         }
     }
 
-    public Boolean entryStundet(int stuId, String name, int borNum, LocalDateTime borTime,
-            LocalDateTime endTime) {
+    public Boolean entryStundet(Student student) {
         PreparedStatement pstmt = null;
         int rows = 0;
         try {
             String sql = "INSERT INTO student(stuId,name,borNum,borTime,endTime) VALUES(?,?,?,?,?)";
             // 开始录入
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, stuId);
-            pstmt.setString(2, name);
-            pstmt.setInt(3, borNum);
-            pstmt.setObject(4, borTime);
-            pstmt.setObject(5, endTime);
+            pstmt.setInt(1, student.getStuId());
+            pstmt.setString(2, student.getName());
+            pstmt.setInt(3, student.getBorNum());
+            pstmt.setObject(4, student.getBorTime());
+            pstmt.setObject(5, student.getEndTime());
             rows = pstmt.executeUpdate();
             pstmt.close();
             conn.close();

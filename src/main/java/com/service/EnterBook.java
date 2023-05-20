@@ -1,4 +1,4 @@
-package LibMangeSystem.src.main.java.com.service;
+package main.java.com.service;
 
 import main.java.Setting;
 
@@ -6,10 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.sql.*;
 
-import java.time.*;
-
-import LibMangeSystem.src.main.java.com.model.Book;
-import LibMangeSystem.src.main.java.com.model.BorBook;
+import main.java.Setting;
 
 import javax.swing.*;
 

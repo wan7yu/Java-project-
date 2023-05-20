@@ -9,16 +9,16 @@ import java.awt.event.ActionListener;
 
 import main.java.com.service.Inquire;
 
-public class ViewsEnter extends Box {
+public class BorManage extends Box {
+
     final int width = 850;
     final int hight = 600;
 
-    private JFrame jFrame = null;
     private JTable table;
 
-    public ViewsEnter(JFrame jFrame) {
+    public BorManage(JFrame jFrame) {
         super(BoxLayout.Y_AXIS);
-        this.jFrame = jFrame;
+
         // 组装视图
         JPanel panel = new JPanel();
         panel.setMaximumSize(new Dimension(width, 80));
@@ -28,11 +28,10 @@ public class ViewsEnter extends Box {
         JButton addButton = new JButton("添加");
         JButton updateButton = new JButton("修改");
         JButton deleteButton = new JButton("删除");
-
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddDialog(jFrame, "添加图书", true).setVisible(true);
+                new AddBookDialog(jFrame, "添加图书", true).setVisible(true);
             }
         });
 
@@ -47,7 +46,6 @@ public class ViewsEnter extends Box {
 
         String[][] tableData = Inquire.borStudentQuery();
         table = new JTable(tableData, titles) {
-
             @Override
             public boolean isCellEditable(int row, int colum) {
                 return false;

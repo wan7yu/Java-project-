@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import main.java.Setting;
 
 public class Inquire {
-    private Connection conn = Setting.conMySql();
+    private static Connection conn = Setting.conMySql();
 
-    public String[][] borStudentQuery() {
+    public static String[][] borStudentQuery() {
         // 创建一个可变的二维数组;
         ArrayList<ArrayList<String>> lists = new ArrayList<ArrayList<String>>();
         ResultSet students = null;
