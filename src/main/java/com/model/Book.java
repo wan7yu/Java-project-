@@ -1,20 +1,60 @@
-package LibMangeSystem.src.main.java.com.model;
+package main.java.com.model;
 
 import java.time.*;
 
 public class Book {
+    private int bookId;
     private String bookTitle;
     private String author;
     private String press;
     private int status;
     private LocalDateTime curTime;
+    private int curStuId;
 
-    public void setBook(String bookTitle, String author, String press, int status, LocalDateTime curTime) {
+    // set方法
+    public void setBook(int bookId, String bookTitle, String author, String press, int status, LocalDateTime curTime,
+            int curStuId) {
+        this.bookId = bookId;
         this.bookTitle = bookTitle;
         this.author = author;
         this.press = press;
         this.status = status;
         this.curTime = curTime;
+        this.curStuId = curStuId;
+    }
+
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
+
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setPress(String press) {
+        this.press = press;
+
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public void setCurTime(LocalDateTime curTime) {
+        this.curTime = curTime;
+    }
+
+    public void setCurStuId(int curStuId) {
+        this.curStuId = curStuId;
+    }
+
+    // get方法
+    public int getBookId() {
+        return this.bookId;
     }
 
     public String getBookTitle() {
@@ -35,5 +75,9 @@ public class Book {
 
     public LocalDateTime getBorTime() {
         return this.curTime;
+    }
+
+    public int getCurStuId() {
+        return this.curStuId;
     }
 }

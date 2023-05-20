@@ -1,10 +1,8 @@
-package LibMangeSystem.src.main.java.com.service;
+package main.java.com.service;
 
 import java.sql.*;
 
-import LibMangeSystem.src.main.java.Setting;
-import LibMangeSystem.src.main.java.com.model.Book;
-import LibMangeSystem.src.main.java.com.model.BorBook;
+import main.java.Setting;
 
 public class EnterBook {
     public void enterBook() {

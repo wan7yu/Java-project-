@@ -7,7 +7,6 @@ public class Manage {
         // ViewsMenu menu = new ViewsMenu();
         // menu.menu();
         ViewsEnter enter = new ViewsEnter();
-        enter.enterStudent();
         // ViewsQuery.bookQuery();
     }
 }
