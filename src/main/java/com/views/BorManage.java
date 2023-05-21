@@ -31,7 +31,7 @@ public class BorManage extends Box {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddBookDialog(jFrame, "添加图书", true).setVisible(true);
+                new AddBorDialog(jFrame, "添加图书", true).setVisible(true);
             }
         });
 
@@ -42,7 +42,7 @@ public class BorManage extends Box {
         // 添加panel
         this.add(panel);
         // 组装表格
-        String[] titles = { "学号", "姓名", "借阅书籍名称", "借阅时间" };
+        String[] titles = { "学号", "姓名", "书籍名称", "借阅时间" };
 
         String[][] tableData = Inquire.borStudentQuery();
         table = new JTable(tableData, titles) {

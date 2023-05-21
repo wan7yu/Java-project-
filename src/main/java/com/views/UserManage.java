@@ -7,18 +7,14 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import main.java.com.service.Inquire;
-
-public class ViewsEnter extends Box {
+public class UserManage extends Box {
     final int width = 850;
     final int hight = 600;
 
-    private JFrame jFrame = null;
     private JTable table;
 
-    public ViewsEnter(JFrame jFrame) {
+    public UserManage(JFrame jFrame) {
         super(BoxLayout.Y_AXIS);
-        this.jFrame = jFrame;
         // 组装视图
         JPanel panel = new JPanel();
         panel.setMaximumSize(new Dimension(width, 80));
@@ -29,10 +25,11 @@ public class ViewsEnter extends Box {
         JButton updateButton = new JButton("修改");
         JButton deleteButton = new JButton("删除");
 
+        // 为按钮绑定事件
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddDialog(jFrame, "添加图书", true).setVisible(true);
+                new AddBookDialog(jFrame, "添加图书", true).setVisible(true);
             }
         });
 
@@ -43,7 +40,7 @@ public class ViewsEnter extends Box {
         // 添加panel
         this.add(panel);
         // 组装表格
-        String[] titles = { "学号", "姓名", "借阅书籍名称", "借阅时间" };
+        String[] titles = { "用户名", "用户身份", "创建时间" };
 
         String[][] tableData = Inquire.borStudentQuery();
         table = new JTable(tableData, titles) {
