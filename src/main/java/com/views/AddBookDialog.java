@@ -5,8 +5,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-public class AddDialog extends JDialog {
-    public AddDialog(JFrame jFrame, String title, Boolean isModel) {
+public class AddBookDialog extends JDialog {
+    public AddBookDialog(JFrame jFrame, String title, Boolean isModel) {
         super(jFrame, title, isModel);
         // 组装视图
         // 创建纵向容器
