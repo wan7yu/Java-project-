@@ -21,7 +21,7 @@ public class login {
 
         // 创建横向容器和创建username标签和输入框
         Box unBox = Box.createHorizontalBox();
-        JLabel unLabel = new JLabel("用户名: ");
+        JLabel unLabel = new JLabel("用户名:");
         JTextField unField = new JTextField();
 
         // 横向容器添加
@@ -31,7 +31,7 @@ public class login {
 
         // 创建横向容器和创建password标签和输入框
         Box pwBox = Box.createHorizontalBox();
-        JLabel pwJLabel = new JLabel("密   码: ");
+        JLabel pwJLabel = new JLabel("密    码:");
         JTextField pwField = new JTextField();
 
         // 横向容器添加

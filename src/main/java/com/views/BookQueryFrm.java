@@ -1,9 +1,9 @@
-package LibMangeSystem.src.main.java.com.views;
-
-import LibMangeSystem.src.main.java.com.model.Book;
-import LibMangeSystem.src.main.java.com.service.QueryBook;
+package main.java.com.views;
 
 import javax.swing.*;
+
+import main.java.com.service.QueryBook;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -35,7 +35,7 @@ public class BookQueryFrm {
 
         // 加入查询到的图书,默认是全部图书
         Book[] defaultBook = QueryBook.queryAll();
-        String[] colum = {"书名", "作者", "出版社", "借阅状态", "借阅时间"};
+        String[] colum = { "书名", "作者", "出版社", "借阅状态", "借阅时间" };
         String[][] data = new String[defaultBook.length][5];
         for (int i = 0; i < defaultBook.length; i++) {
             data[i][0] = defaultBook[i].getBookTitle();
@@ -89,7 +89,7 @@ public class BookQueryFrm {
                     temDate[0][3] = sBook.getPress();
                     temDate[0][4] = sBook.getStatus();
                     temDate[0][5] = sBook.getBorTime();
-                    JTable temTable = new JTable(temDate,colum);
+                    JTable temTable = new JTable(temDate, colum);
                     table.setVisible(false);
                     pane.add(temTable);
                     windows.repaint();

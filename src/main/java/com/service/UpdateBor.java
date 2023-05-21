@@ -5,7 +5,7 @@ import java.time.*;
 
 import main.java.Setting;
 
-public class Update {
+public class UpdateBor {
     private Connection conn = Setting.conMySql();
 
     public Boolean updateBook(int bookId, LocalDateTime curTime) {

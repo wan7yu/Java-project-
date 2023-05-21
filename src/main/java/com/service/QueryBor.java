@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import main.java.Setting;
 
-public class Inquire {
+public class QueryBor {
     private static Connection conn = Setting.conMySql();
 
     public static String[][] borStudentQuery() {

@@ -42,7 +42,7 @@ public class UserManage extends Box {
         // 组装表格
         String[] titles = { "用户名", "用户身份", "创建时间" };
 
-        String[][] tableData = Inquire.borStudentQuery();
+        String[][] tableData = QueryBor.borStudentQuery();
         table = new JTable(tableData, titles) {
 
             @Override

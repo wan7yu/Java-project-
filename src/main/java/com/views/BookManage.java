@@ -7,7 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import main.java.com.service.Inquire;
+import main.java.com.service.QueryBor;
 
 public class BookManage extends Box {
     final int width = 850;
@@ -43,7 +43,7 @@ public class BookManage extends Box {
         // 组装表格
         String[] titles = { "图书编号", "书名", "作者", "出版社", "借阅状态", "借阅学生", "借阅时间", "归还限期" };
 
-        String[][] tableData = Inquire.borStudentQuery();
+        String[][] tableData = QueryBor.borStudentQuery();
         table = new JTable(tableData, titles) {
 
             @Override

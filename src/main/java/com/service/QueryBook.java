@@ -1,6 +1,6 @@
-package LibMangeSystem.src.main.java.com.service;
+package main.java.com.service;
 
-import LibMangeSystem.src.main.java.com.model.Book;
+import main.java.com.model.Book;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -10,13 +10,14 @@ import java.util.ArrayList;
 public class QueryBook {
     private static Connection conn = main.java.Setting.conMySql();
     public static Book book;
+
     // 查询所有图书
-    public static Book[] queryAll() throws SQLException{
+    public static Book[] queryAll() throws SQLException {
         ArrayList<Book> AllBook = new ArrayList<>();
         Statement sql = conn.createStatement();
         ResultSet aBooks;
         aBooks = sql.executeQuery("SELECT bookTitle,author,press,status,curTime FROM book");
-        while (aBooks.next()){
+        while (aBooks.next()) {
             Book abook = new Book();
             AllBook.add(abook);
             String bookTitle = aBooks.getString("bookTitle");
@@ -24,7 +25,7 @@ public class QueryBook {
             String press = aBooks.getString("press");
             int status = aBooks.getInt("status");
             LocalDateTime curtime = (LocalDateTime) aBooks.getObject("curtime");
-            abook.setBook(bookTitle,author,press,status,curtime);
+            abook.setBook(bookTitle, author, press, status, curtime);
         }
         Book[] books = new Book[AllBook.size()];
         for (int i = 0; i < AllBook.size(); i++) {
