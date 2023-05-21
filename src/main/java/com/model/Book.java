@@ -81,4 +81,8 @@ public class Book {
     public int getCurStuId() {
         return this.curStuId;
     }
+
+    public int getCurStuId() {
+        return this.curStuId;
+    }
 }

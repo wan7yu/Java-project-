@@ -6,8 +6,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.sql.*;
 
-import main.java.Setting;
-
 import javax.swing.*;
 
 public class EnterBook {
