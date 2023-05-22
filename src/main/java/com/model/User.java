@@ -1,33 +1,49 @@
 package main.java.com.model;
 
-import java.time.LocalDateTime;
-
 public class User {
-    private String username;
+    private int userId;
     private String password;
-    private LocalDateTime createTime;
+    private String name;
+    private int borNum;
 
-    public void setUserName(String username) {
-        this.username = username;
+    // set方法
+    public void setBook(int userId, String password, String name, int borNum) {
+        this.userId = userId;
+        this.password = password;
+        this.name = name;
+        this.borNum = borNum;
+    }
+
+    public void setStuId(int userId) {
+        this.userId = userId;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getUserName() {
-        return this.username;
+    public void setBorNUm(int borNum) {
+        this.borNum = borNum;
+    }
+
+    // get方法
+    public int getStuId() {
+        return this.userId;
     }
 
     public String getPassword() {
         return this.password;
     }
 
-    public LocalDateTime getCreateTime() {
-        return this.createTime;
+    public String getName() {
+        return this.name;
+    }
+
+    public int getBorNum() {
+        return this.borNum;
     }
 }

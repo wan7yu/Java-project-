@@ -1,4 +1,4 @@
-package LibMangeSystem.src.main.java.com.service;
+package main.java.com.service;
 
 import java.sql.*;
 import java.time.*;
@@ -7,9 +7,9 @@ import main.java.com.model.BorBook;
 import main.java.Setting;
 
 public class EntryPeople {
-    private Connection conn = Setting.conMySql();
+    private static Connection conn = Setting.conMySql();
 
-    public Boolean entryBorBook(BorBook borBook) {
+    public static Boolean entryBorBook(BorBook borBook) {
         PreparedStatement pstmt = null;
         int rows = 0;
         try {
@@ -33,7 +33,7 @@ public class EntryPeople {
         }
     }
 
-    public Boolean entryStundet(Student student) {
+    public static Boolean entryStundet(Student student) {
         PreparedStatement pstmt = null;
         int rows = 0;
         try {

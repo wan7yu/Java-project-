@@ -1,6 +1,5 @@
 package main.java.com.model;
 
-import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class Book {
@@ -10,18 +9,18 @@ public class Book {
     private String press;
     private int status;
     private LocalDateTime curTime;
-    private int curStuId;
+    private int userId;
 
     // set方法
     public void setBook(int bookId, String bookTitle, String author, String press, int status, LocalDateTime curTime,
-            int curStuId) {
+            int userId) {
         this.bookId = bookId;
         this.bookTitle = bookTitle;
         this.author = author;
         this.press = press;
         this.status = status;
         this.curTime = curTime;
-        this.curStuId = curStuId;
+        this.userId = userId;
     }
 
     public void setBookId(int bookId) {
@@ -49,8 +48,8 @@ public class Book {
         this.curTime = curTime;
     }
 
-    public void setCurStuId(int curStuId) {
-        this.curStuId = curStuId;
+    public void setCurStuId(int userId) {
+        this.userId = userId;
     }
 
     // get方法
@@ -78,11 +77,11 @@ public class Book {
         return String.valueOf(this.curTime);
     }
 
-    public int getCurStuId() {
-        return this.curStuId;
+    public LocalDateTime getCurTime() {
+        return this.curTime;
     }
 
     public int getCurStuId() {
-        return this.curStuId;
+        return this.userId;
     }
 }

@@ -1,4 +1,4 @@
-package LibMangeSystem.src.main;
+package main;
 
 import main.java.com.views.*;
 

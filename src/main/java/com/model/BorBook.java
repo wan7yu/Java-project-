@@ -4,26 +4,32 @@ import java.time.*;
 
 public class BorBook {
     private int bookId;
-    private int stuId;
+    private int userId;
     private LocalDateTime curTime;
+    private LocalDateTime endTime;
 
     // set方法
-    public void setBorBook(int bookId, int stuId, LocalDateTime curTime) {
+    public void setBorBook(int bookId, int userId, LocalDateTime curTime, LocalDateTime endTime) {
         this.bookId = bookId;
-        this.stuId = stuId;
+        this.userId = userId;
         this.curTime = curTime;
+        this.endTime = endTime;
     }
 
     public void setBookId(int bookId) {
         this.bookId = bookId;
     }
 
-    public void setStuId(int stuId) {
-        this.stuId = stuId;
+    public void setStuId(int userId) {
+        this.userId = userId;
     }
 
     public void setCurTime(LocalDateTime curTime) {
         this.curTime = curTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 
     // get方法
@@ -32,7 +38,7 @@ public class BorBook {
     }
 
     public int getStuId() {
-        return this.stuId;
+        return this.userId;
     }
 
     public LocalDateTime getCuTime() {
@@ -41,5 +47,9 @@ public class BorBook {
 
     public LocalDateTime getCurTime() {
         return this.curTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return this.endTime;
     }
 }

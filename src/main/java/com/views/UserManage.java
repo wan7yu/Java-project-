@@ -2,6 +2,8 @@ package main.java.com.views;
 
 import javax.swing.*;
 
+import main.java.com.service.QueryUser;
+
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
@@ -40,9 +42,9 @@ public class UserManage extends Box {
         // 添加panel
         this.add(panel);
         // 组装表格
-        String[] titles = { "用户名", "用户身份", "创建时间" };
+        String[] titles = { "用户名", "密码", "姓名", "借阅数量" };
 
-        String[][] tableData = QueryBor.borStudentQuery();
+        String[][] tableData = QueryUser.userQuery();
         table = new JTable(tableData, titles) {
 
             @Override
