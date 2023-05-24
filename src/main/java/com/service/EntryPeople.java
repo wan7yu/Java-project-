@@ -9,30 +9,6 @@ import main.java.Setting;
 public class EntryPeople {
     private static Connection conn = Setting.conMySql();
 
-    public static Boolean entryBorBook(BorBook borBook) {
-        PreparedStatement pstmt = null;
-        int rows = 0;
-        try {
-            String insertSql = "INSERT INTO student(bookId,stuId,curTime) VALUES(?,?,?)";
-            // 开始录入
-            pstmt = conn.prepareStatement(insertSql);
-            pstmt.setInt(1, borBook.getBookId());
-            pstmt.setInt(2, borBook.getStuId());
-            pstmt.setObject(3, borBook.getCurTime());
-            rows = pstmt.executeUpdate();
-            pstmt.close();
-            conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        // 判断是否录入成功
-        if (rows > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public static Boolean entryStundet(Student student) {
         PreparedStatement pstmt = null;
         int rows = 0;

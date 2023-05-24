@@ -2,12 +2,13 @@ package main.java.com.views;
 
 import javax.swing.*;
 
-import main.java.com.service.QueryUser;
-
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import main.java.util.*;
+import main.java.com.service.*;
 
 public class UserManage extends Box {
     final int width = 850;
@@ -44,7 +45,7 @@ public class UserManage extends Box {
         // 组装表格
         String[] titles = { "用户名", "密码", "姓名", "借阅数量" };
 
-        String[][] tableData = QueryUser.userQuery();
+        String[][] tableData = VectorToList.toStringList(QueryUser.userQuery());
         table = new JTable(tableData, titles) {
 
             @Override

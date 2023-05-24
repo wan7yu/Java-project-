@@ -7,6 +7,9 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import main.java.util.*;
+import main.java.com.service.*;
+
 public class BookManage extends Box {
     final int width = 850;
     final int hight = 600;

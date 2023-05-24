@@ -60,13 +60,12 @@ public class AddBorDialog extends JDialog {
                     String stuId = stuIdField.getText().trim();
                     String name = nameField.getText().trim();
                     String bookId = bookIdField.getText().trim();
-                    if (EnterBor.enterBor(Integer.parseInt(stuId), name, Integer.parseInt(bookId))) {
+                    if (EnterBor.enterBor(stuId, name, bookId)) {
                         JOptionPane.showMessageDialog(null, "添加成功!", "添加借阅记录", JOptionPane.INFORMATION_MESSAGE);
                     } else {
                         JOptionPane.showMessageDialog(null, "添加失败!", "添加借阅记录", JOptionPane.INFORMATION_MESSAGE);
                     }
                 } else if (isOk == 2) {
-
                 }
 
             }

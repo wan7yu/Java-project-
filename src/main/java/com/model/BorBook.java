@@ -20,7 +20,7 @@ public class BorBook {
         this.bookId = bookId;
     }
 
-    public void setStuId(int userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -37,12 +37,8 @@ public class BorBook {
         return this.bookId;
     }
 
-    public int getStuId() {
+    public int getUserId() {
         return this.userId;
-    }
-
-    public LocalDateTime getCuTime() {
-        return this.curTime;
     }
 
     public LocalDateTime getCurTime() {

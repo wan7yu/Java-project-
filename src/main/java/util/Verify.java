@@ -6,17 +6,19 @@ import main.java.Setting;
 
 public class Verify {
     private static Connection conn = Setting.conMySql();
-    private static Boolean isBoolean;
+    private static int object;
 
-    public static Boolean isStudent(int userId) {
+    public static int isStudent(String userId, String name) {
         try {
-            PreparedStatement pstmt = conn.prepareStatement("SELECT id FROM user WHERE userId = ?");
-            pstmt.setInt(1, userId);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT id FROM user WHERE userId = ? AND name = ?;");
+            pstmt.setString(1, userId);
+            pstmt.setString(2, name);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                isBoolean = true;
+                object = rs.getInt(1);
+                System.out.println(object);
             } else {
-                isBoolean = false;
+                object = 0;
             }
             rs.close();
             pstmt.close();
@@ -24,18 +26,18 @@ public class Verify {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return isBoolean;
+        return object;
     }
 
-    public static Boolean isBookId(int bookId) {
+    public static int isBookId(String bookId) {
         try {
-            PreparedStatement pstmt = conn.prepareStatement("SELECT id FROM book WHERE bookId = ?");
-            pstmt.setInt(1, bookId);
+            PreparedStatement pstmt = conn.prepareStatement("SELECT id FROM book WHERE bookId = ?;");
+            pstmt.setString(1, bookId);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-                isBoolean = true;
+                object = rs.getInt(1);
             } else {
-                isBoolean = false;
+                object = 0;
             }
             rs.close();
             pstmt.close();
@@ -43,6 +45,6 @@ public class Verify {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return isBoolean;
+        return object;
     }
 }

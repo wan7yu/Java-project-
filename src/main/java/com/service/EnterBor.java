@@ -10,25 +10,29 @@ import main.java.util.*;
 public class EnterBor {
     private static Connection conn = Setting.conMySql();
 
-    public static Boolean enterBor(int userId, String name, int bookId) {
+    public static Boolean enterBor(String userId, String name, String bookId) {
         LocalDateTime curTime = LocalDateTime.now();
         LocalDateTime endTime = curTime.plusDays(120);
         BorBook borBook = new BorBook();
-        if (Verify.isStudent(userId)) {
+        int user = Verify.isStudent(userId, name);
+
+        if (user == 0) {
             return false;
         }
-        if (Verify.isBookId(bookId)) {
+        int book = Verify.isBookId(bookId);
+
+        if (book == 0) {
             return false;
         }
-        borBook.setBorBook(userId, bookId, curTime, endTime);
+        borBook.setBorBook(user, book, curTime, endTime);
         PreparedStatement pstmt = null;
         int rows = 0;
         try {
             String sql = "INSERT INTO borBook(userId,bookId,curTime) VALUES(?,?,?)";
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, userId);
-            pstmt.setInt(2, bookId);
-            pstmt.setObject(3, curTime);
+            pstmt.setInt(1, borBook.getUserId());
+            pstmt.setInt(2, borBook.getBookId());
+            pstmt.setObject(3, borBook.getCurTime());
             rows = pstmt.executeUpdate();
             pstmt.close();
             conn.close();
@@ -40,8 +44,8 @@ public class EnterBor {
             try {
                 String sql = "UPDATE book set curTime = ? where bookId = ?";
                 pstmt = conn.prepareStatement(sql);
-                pstmt.setObject(1, curTime);
-                pstmt.setInt(2, bookId);
+                pstmt.setObject(1, borBook.getCurTime());
+                pstmt.setString(2, bookId);
                 rows = pstmt.executeUpdate();
                 pstmt.close();
                 conn.close();
@@ -59,6 +63,6 @@ public class EnterBor {
     }
 
     public static void main(String[] args) {
-        new EnterBor().enterBor(1, "null", 0);
+        enterBor("2021764101", "杨丹丹", "010001");
     }
 }

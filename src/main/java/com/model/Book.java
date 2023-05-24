@@ -3,17 +3,17 @@ package main.java.com.model;
 import java.time.LocalDateTime;
 
 public class Book {
-    private int bookId;
+    private String bookId;
     private String bookTitle;
     private String author;
     private String press;
     private int status;
     private LocalDateTime curTime;
-    private int userId;
+    private String userId;
 
     // set方法
-    public void setBook(int bookId, String bookTitle, String author, String press, int status, LocalDateTime curTime,
-            int userId) {
+    public void setBook(String bookId, String bookTitle, String author, String press, int status, LocalDateTime curTime,
+            String userId) {
         this.bookId = bookId;
         this.bookTitle = bookTitle;
         this.author = author;
@@ -23,7 +23,7 @@ public class Book {
         this.userId = userId;
     }
 
-    public void setBookId(int bookId) {
+    public void setBookId(String bookId) {
         this.bookId = bookId;
     }
 
@@ -48,12 +48,12 @@ public class Book {
         this.curTime = curTime;
     }
 
-    public void setCurStuId(int userId) {
+    public void setCurStuId(String userId) {
         this.userId = userId;
     }
 
     // get方法
-    public int getBookId() {
+    public String getBookId() {
         return this.bookId;
     }
 
@@ -81,7 +81,7 @@ public class Book {
         return this.curTime;
     }
 
-    public int getCurStuId() {
+    public String getCurStuId() {
         return this.userId;
     }
 }

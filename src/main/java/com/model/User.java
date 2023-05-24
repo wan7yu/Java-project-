@@ -1,20 +1,20 @@
 package main.java.com.model;
 
 public class User {
-    private int userId;
+    private String userId;
     private String password;
     private String name;
     private int borNum;
 
     // set方法
-    public void setBook(int userId, String password, String name, int borNum) {
+    public void setBook(String userId, String password, String name, int borNum) {
         this.userId = userId;
         this.password = password;
         this.name = name;
         this.borNum = borNum;
     }
 
-    public void setStuId(int userId) {
+    public void setStuId(String userId) {
         this.userId = userId;
     }
 
@@ -31,7 +31,7 @@ public class User {
     }
 
     // get方法
-    public int getStuId() {
+    public String getStuId() {
         return this.userId;
     }
 

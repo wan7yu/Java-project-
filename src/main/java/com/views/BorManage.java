@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import main.java.com.service.QueryBor;
+import main.java.util.*;
 
 public class BorManage extends Box {
 
@@ -44,7 +45,7 @@ public class BorManage extends Box {
         // 组装表格
         String[] titles = { "学号", "姓名", "书籍名称", "借阅时间" };
 
-        String[][] tableData = QueryBor.borStudentQuery();
+        String[][] tableData = VectorToList.toStringList(QueryBor.borUserQuery());
         table = new JTable(tableData, titles) {
             @Override
             public boolean isCellEditable(int row, int colum) {
