@@ -7,8 +7,8 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import main.java.com.service.QueryBor;
 import main.java.util.*;
+import main.java.com.service.*;
 
 public class BorManage extends Box {
 
@@ -35,7 +35,29 @@ public class BorManage extends Box {
                 new AddBorDialog(jFrame, "添加图书", true).setVisible(true);
             }
         });
-
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 返回选中的行号,没有选中返回-1
+                int selectdRow = table.getSelectedRow();
+                if (selectdRow == -1) {
+                    JOptionPane.showMessageDialog(null, "请选择的修改的对象!");
+                    return;
+                }
+            }
+        });
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 返回选中的行号,没有选中返回-1
+                int selectdRow = table.getSelectedRow();
+                if (selectdRow == -1) {
+                    JOptionPane.showMessageDialog(null, "请选择的修改的对象!");
+                    return;
+                }
+                String value = table.getValueAt(selectdRow, 0).toString();
+            }
+        });
         // 添加按钮
         panel.add(addButton);
         panel.add(updateButton);
@@ -43,7 +65,7 @@ public class BorManage extends Box {
         // 添加panel
         this.add(panel);
         // 组装表格
-        String[] titles = { "学号", "姓名", "书籍名称", "借阅时间" };
+        String[] titles = { "学号", "姓名", "书籍名称", "借阅时间", "归还限期" };
 
         String[][] tableData = VectorToList.toStringList(QueryBor.borUserQuery());
         table = new JTable(tableData, titles) {

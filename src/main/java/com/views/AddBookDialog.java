@@ -6,8 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 
 public class AddBookDialog extends JDialog {
-    public AddBookDialog(JFrame jFrame, String title, Boolean isModel) {
-        super(jFrame, title, isModel);
+
+    public AddBookDialog(JFrame jFrame, String title, Boolean isMode) {
+        super(jFrame, title, isMode);
         // 组装视图
         // 创建纵向容器
         Box vBox = Box.createVerticalBox();

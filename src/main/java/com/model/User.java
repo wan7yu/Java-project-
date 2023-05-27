@@ -14,7 +14,7 @@ public class User {
         this.borNum = borNum;
     }
 
-    public void setStuId(String userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -31,7 +31,7 @@ public class User {
     }
 
     // get方法
-    public String getStuId() {
+    public String getUserId() {
         return this.userId;
     }
 

@@ -1,11 +1,15 @@
 package main.java.com.views;
 
+import java.time.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
 import main.java.com.service.*;
+import main.java.com.model.*;
+import main.java.util.*;
 
 public class AddBorDialog extends JDialog {
 
@@ -16,14 +20,14 @@ public class AddBorDialog extends JDialog {
         Box vBox = Box.createVerticalBox();
 
         // 创建横向容器和创建username标签和输入框
-        Box stuIdBox = Box.createHorizontalBox();
-        JLabel stuIdLabel = new JLabel("学       号: ");
-        JTextField stuIdField = new JTextField();
+        Box userBox = Box.createHorizontalBox();
+        JLabel userLabel = new JLabel("学       号: ");
+        JTextField userField = new JTextField();
 
         // 横向容器添加
-        stuIdBox.add(stuIdLabel);
-        stuIdBox.add(Box.createHorizontalStrut(20));
-        stuIdBox.add(stuIdField);
+        userBox.add(userLabel);
+        userBox.add(Box.createHorizontalStrut(20));
+        userBox.add(userField);
 
         // 创建横向容器和创建username标签和输入框
         Box nameBox = Box.createHorizontalBox();
@@ -56,12 +60,28 @@ public class AddBorDialog extends JDialog {
                 // 获取输入框信息
                 int isOk = JOptionPane.showConfirmDialog(null, "确认添加?", "添加借阅记录", JOptionPane.OK_CANCEL_OPTION,
                         JOptionPane.INFORMATION_MESSAGE);
-                if (isOk == 1) {
-                    String stuId = stuIdField.getText().trim();
+                if (isOk == 0) {
+                    String userId = userField.getText().trim();
                     String name = nameField.getText().trim();
                     String bookId = bookIdField.getText().trim();
-                    if (EnterBor.enterBor(stuId, name, bookId)) {
+                    // 获取当前时间
+                    LocalDateTime curTime = LocalDateTime.now();
+                    LocalDateTime endTime = curTime.plusDays(120);
+                    BorBook borBook = new BorBook();
+                    int user = Verify.isUser(userId, name);
+                    if (user == 0) {
+                        String msg = "用户不存在";
+                        System.out.println(msg);
+                    }
+                    int book = Verify.isBook(bookId);
+                    if (book == 0) {
+                        String msg = "书籍不存在";
+                        System.out.println(msg);
+                    }
+                    borBook.setBorBook(book, user, curTime, endTime);
+                    if (EnterBor.enterBor(borBook, bookId)) {
                         JOptionPane.showMessageDialog(null, "添加成功!", "添加借阅记录", JOptionPane.INFORMATION_MESSAGE);
+                        dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "添加失败!", "添加借阅记录", JOptionPane.INFORMATION_MESSAGE);
                     }
@@ -84,7 +104,7 @@ public class AddBorDialog extends JDialog {
         bBox.add(cancelButton);
 
         vBox.add(Box.createVerticalStrut(30));
-        vBox.add(stuIdBox);
+        vBox.add(userBox);
         vBox.add(Box.createVerticalStrut(10));
         vBox.add(nameBox);
         vBox.add(Box.createVerticalStrut(10));

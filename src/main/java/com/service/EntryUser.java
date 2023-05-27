@@ -1,26 +1,24 @@
 package main.java.com.service;
 
 import java.sql.*;
-import java.time.*;
 
-import main.java.com.model.BorBook;
+import main.java.com.model.User;
 import main.java.Setting;
 
-public class EntryPeople {
+public class EntryUser {
     private static Connection conn = Setting.conMySql();
 
-    public static Boolean entryStundet(Student student) {
+    public static Boolean entryStundet(User user) {
         PreparedStatement pstmt = null;
         int rows = 0;
         try {
-            String sql = "INSERT INTO student(stuId,name,borNum,borTime,endTime) VALUES(?,?,?,?,?)";
+            String sql = "INSERT INTO user(userId,password,name,borNum) VALUES(?,?,?,?)";
             // 开始录入
             pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, student.getStuId());
-            pstmt.setString(2, student.getName());
-            pstmt.setInt(3, student.getBorNum());
-            pstmt.setObject(4, student.getBorTime());
-            pstmt.setObject(5, student.getEndTime());
+            pstmt.setString(1, user.getUserId());
+            pstmt.setString(2, user.getPassword());
+            pstmt.setString(3, user.getName());
+            pstmt.setInt(4, user.getBorNum());
             rows = pstmt.executeUpdate();
             pstmt.close();
             conn.close();

@@ -35,6 +35,18 @@ public class BookManage extends Box {
             }
         });
 
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 返回选中的行号,没有选中返回-1
+                int selectdRow = table.getSelectedRow();
+                if (selectdRow == -1) {
+                    JOptionPane.showMessageDialog(null, "请选择的修改的对象!");
+                    return;
+                }
+            }
+        });
+
         // 添加按钮
         panel.add(addButton);
         panel.add(updateButton);
@@ -42,16 +54,12 @@ public class BookManage extends Box {
         // 添加panel
         this.add(panel);
         // 组装表格
-        String[] titles = { "图书编号", "书名", "作者", "出版社", "借阅状态", "借阅学生", "借阅时间", "归还限期" };
+        String[] titles = { "图书编号", "书名", "作者", "出版社", "借阅状态", "借阅学生", "借阅时间" };
 
-        String[][] tableData = new String[0][0];
-        table = new JTable(tableData, titles) {
+        String[][] tableData = VectorToList.toStringList(QueryBook.queryAll());
 
-            @Override
-            public boolean isCellEditable(int row, int colum) {
-                return false;
-            }
-        };
+        table = new JTable(tableData, titles);
+
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.add(new JScrollPane(table));
     }

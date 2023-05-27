@@ -12,8 +12,14 @@ public class UpdateBor {
         int rows = 0;
         try {
             Statement updateSql = conn.createStatement();
-            rows = updateSql
-                    .executeUpdate("update book set curTime = " + curTime + " where id = " + bookId + ";");
+            String sql = "update book set curTime = ? where id = ? ;";
+            ResultSet rs = updateSql.executeQuery(sql);
+            if (!rs.next()) {
+                return false;
+            } else {
+
+            }
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
         }

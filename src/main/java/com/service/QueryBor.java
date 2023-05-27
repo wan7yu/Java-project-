@@ -14,7 +14,7 @@ public class QueryBor {
         ResultSet resultset = null;
         try {
             Statement statement = conn.createStatement();
-            String sql = "SELECT u.userId, u.name, b.bookTitle, bb.curTime FROM borBook bb JOIN user u ON bb.userId = u.id JOIN book b ON bb.bookId = b.id;";
+            String sql = "SELECT u.userId, u.name, b.bookTitle, bb.curTime,bb.endTime FROM borBook bb JOIN user u ON bb.userId = u.id JOIN book b ON bb.bookId = b.id;";
             resultset = statement.executeQuery(sql);
             // 判断是否存在查询结果
             if (!resultset.next()) {
@@ -25,15 +25,21 @@ public class QueryBor {
                 String name = resultset.getString(2);
                 String bookTitle = resultset.getString(3);
                 Timestamp curTime = resultset.getTimestamp(4);
-                String stuCurTime = new String();
+                Timestamp endTime = resultset.getTimestamp(5);
+                String userCurTime = new String();
                 if (curTime != null) {
-                    stuCurTime = curTime.toString();
+                    userCurTime = curTime.toString();
+                }
+                String userEndTIme = new String();
+                if (endTime != null) {
+                    userEndTIme = endTime.toString();
                 }
                 Vector<String> data = new Vector<>();
                 data.add(userId);
                 data.add(name);
                 data.add(bookTitle);
-                data.add(stuCurTime);
+                data.add(userCurTime);
+                data.add(userEndTIme);
                 dataList.add(data);
             } while (resultset.next());
         } catch (SQLException e) {
