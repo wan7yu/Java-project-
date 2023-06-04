@@ -7,8 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import main.java.util.*;
-import main.java.com.service.*;
+
 
 public class BorManage extends Box {
 
@@ -32,7 +31,7 @@ public class BorManage extends Box {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddBorDialog(jFrame, "添加图书", true).setVisible(true);
+                new main.java.com.views.AddBorDialog(jFrame, "添加图书", true).setVisible(true);
             }
         });
         updateButton.addActionListener(new ActionListener() {
@@ -67,7 +66,7 @@ public class BorManage extends Box {
         // 组装表格
         String[] titles = { "学号", "姓名", "书籍名称", "借阅时间", "归还限期" };
 
-        String[][] tableData = VectorToList.toStringList(QueryBor.borUserQuery());
+        String[][] tableData = main.java.util.VectorToList.toStringList(main.java.com.service.QueryBor.borUserQuery());
         table = new JTable(tableData, titles) {
             @Override
             public boolean isCellEditable(int row, int colum) {

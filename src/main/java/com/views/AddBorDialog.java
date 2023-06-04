@@ -7,9 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-import main.java.com.service.*;
-import main.java.com.model.*;
-import main.java.util.*;
+
 
 public class AddBorDialog extends JDialog {
 
@@ -67,19 +65,19 @@ public class AddBorDialog extends JDialog {
                     // 获取当前时间
                     LocalDateTime curTime = LocalDateTime.now();
                     LocalDateTime endTime = curTime.plusDays(120);
-                    BorBook borBook = new BorBook();
-                    int user = Verify.isUser(userId, name);
+                    main.java.com.model.BorBook borBook = new main.java.com.model.BorBook();
+                    int user = main.java.util.Verify.isUser(userId, name);
                     if (user == 0) {
                         String msg = "用户不存在";
                         System.out.println(msg);
                     }
-                    int book = Verify.isBook(bookId);
+                    int book = main.java.util.Verify.isBook(bookId);
                     if (book == 0) {
                         String msg = "书籍不存在";
                         System.out.println(msg);
                     }
                     borBook.setBorBook(book, user, curTime, endTime);
-                    if (EnterBor.enterBor(borBook, bookId)) {
+                    if (main.java.com.service.EnterBor.enterBor(borBook, bookId)) {
                         JOptionPane.showMessageDialog(null, "添加成功!", "添加借阅记录", JOptionPane.INFORMATION_MESSAGE);
                         dispose();
                     } else {

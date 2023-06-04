@@ -1,6 +1,7 @@
 package main.java.com.service;
 
 import main.java.com.model.Book;
+
 import java.util.Vector;
 
 import java.sql.*;
@@ -54,7 +55,33 @@ public class QueryBook {
         }
         return dataList;
     }
-
+    public static Book queryModifyBook(String column,String cell){
+        Book book = new Book();
+        ResultSet rs;
+        try{
+           Statement stmt = conn.createStatement();
+           String sql = "SELECT bookId,bookTitle,author,press,status,curTime,userId FROM book WHERE "+column+"="+"'"+cell+"';";
+            rs = stmt.executeQuery(sql);
+            if (rs.next()){
+                book.setBookId(rs.getString("bookId"));
+                book.setBookTitle(rs.getString("bookTitle"));
+                book.setAuthor(rs.getString("author"));
+                book.setPress(rs.getString("press"));
+                book.setStatus(rs.getInt("status"));
+                Timestamp temTime = rs.getTimestamp("curTime");
+                if (temTime != null) {
+                    book.setCurTime(temTime.toLocalDateTime());
+                }else {
+                    book.setCurTime(null);
+                }
+                book.setUserId(rs.getString("userId"));
+            }
+            return book;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return book;
+    }
     // // 查询指定书的方法
     // public static Book queryDefine(String TemBookTitle, String TemAuthor, String
     // TemPress) throws SQLException {

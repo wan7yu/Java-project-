@@ -8,7 +8,15 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class Mune {
 
     // 创建窗口
-    private JFrame systFrame = new JFrame("豫章图书馆");
+    private static JFrame systFrame = new JFrame("豫章图书馆");
+
+    public static JFrame getSystFrame() {
+        return systFrame;
+    }
+
+    public static void setSystFrame(JFrame systFrame) {
+        Mune.systFrame = systFrame;
+    }
 
     public void init() {
         // 创建菜单条
@@ -56,19 +64,19 @@ public class Mune {
                 Object lastPathCompoent = e.getNewLeadSelectionPath().getLastPathComponent();
 
                 if (userManage.equals(lastPathCompoent)) {
-                    splitPane.setRightComponent(new UserManage(systFrame));
+                    splitPane.setRightComponent(new main.java.com.views.UserManage(systFrame));
                     splitPane.setDividerLocation(150);
                 } else if (bookManage.equals(lastPathCompoent)) {
-                    splitPane.setRightComponent(new BookManage(systFrame));
+                    splitPane.setRightComponent(new main.java.com.views.BookManage(systFrame));
                     splitPane.setDividerLocation(150);
                 } else if (borManage.equals(lastPathCompoent)) {
-                    splitPane.setRightComponent(new BorManage(systFrame));
+                    splitPane.setRightComponent(new main.java.com.views.BorManage(systFrame));
                     splitPane.setDividerLocation(150);
                 }
             }
         });
         // 选中树节点发生的事件
-        splitPane.setRightComponent(new BookManage(systFrame));
+        splitPane.setRightComponent(new main.java.com.views.BookManage(systFrame));
         // 添加树形结构
         splitPane.setLeftComponent(systemJTree);
 
@@ -79,6 +87,7 @@ public class Mune {
         // systFrame.setBounds((1500 - width) / 2, (800 - height) / 2, width, height);
         // systFrame.setResizable(false);
         systFrame.pack();
+        systFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         systFrame.setVisible(true);
     }
 

@@ -7,8 +7,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import main.java.util.*;
-import main.java.com.service.*;
+
 
 public class UserManage extends Box {
     final int width = 850;
@@ -32,7 +31,7 @@ public class UserManage extends Box {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddBookDialog(jFrame, "添加图书", true).setVisible(true);
+                new main.java.com.views.AddBookDialog(jFrame, "添加图书", true).setVisible(true);
             }
         });
 
@@ -45,7 +44,7 @@ public class UserManage extends Box {
         // 组装表格
         String[] titles = { "用户名", "密码", "姓名", "借阅数量" };
 
-        String[][] tableData = VectorToList.toStringList(QueryUser.userQuery());
+        String[][] tableData = main.java.util.VectorToList.toStringList(main.java.com.service.QueryUser.userQuery());
         table = new JTable(tableData, titles) {
 
             @Override

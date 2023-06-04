@@ -48,7 +48,7 @@ public class Book {
         this.curTime = curTime;
     }
 
-    public void setCurStuId(String userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -81,7 +81,7 @@ public class Book {
         return this.curTime;
     }
 
-    public String getCurStuId() {
+    public String getUserId() {
         return this.userId;
     }
 }

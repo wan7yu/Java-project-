@@ -3,12 +3,11 @@ package main.java.com.service;
 import java.sql.*;
 
 import main.java.Setting;
-import main.java.com.model.*;
 
 public class EnterBor {
     private static Connection conn = Setting.conMySql();
 
-    public static Boolean enterBor(BorBook borBook, String bookId) {
+    public static Boolean enterBor(main.java.com.model.BorBook borBook, String bookId) {
         PreparedStatement pstmt = null;
         int rows = 0;
         try {
