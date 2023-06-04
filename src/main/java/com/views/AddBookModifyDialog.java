@@ -6,6 +6,7 @@ import LibMangeSystem.src.main.java.util.ToColumnName;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
@@ -132,14 +133,34 @@ public class AddBookModifyDialog extends JDialog {
                 String tmpAuthor = authorField.getText();
                 String tmpPress = pressField.getText();
                 String tmpStatus = statusField.getText();
-                String tmpCurTime = curTimeField.getText();
-                LocalDateTime time =null;
-                if (tmpCurTime!=null){
-                    time = LocalDateTime.parse(tmpCurTime);
+                int status=0;
+                if (!tmpStatus.equals("")){
+                    status = Integer.parseInt(tmpStatus);
                 }
-                String tmpCurId = curStuIdField.getText();
+                // 处理输入的时间 可能是 " "、2021 12 14、2021-12-14、2021:12:14
+                String s = curTimeField.getText();
+                Timestamp curTime = null;
+                // 处理非法数据
+                if (tmpBookId.equals("") || tmpTitle.equals("") || tmpAuthor.equals("")
+                        || tmpPress.equals("")) {
+                    JOptionPane.showMessageDialog(null, "输入数据有误！");
+                    return;
+                }
+                if (!s.equals("") && status != 0) {
+                    boolean isTime = s.matches("([01]\\d|2[0-3])([:\\-]?)[0-5]\\d([:\\-]?)[0-5]\\d");
+                    // 如果满足格式
+                    if (isTime) {
+                        s = s.replaceAll("\\D|\\|:", "-");
+                        curTime = Timestamp.valueOf(s);
+                    }
+                }
+                String tmpStuId = curStuIdField.getText();
+                if (curTime != null) {
+                    book.setBook(tmpBookId,tmpTitle,tmpAuthor,tmpPress,Integer.parseInt(tmpStatus),
+                            curTime.toLocalDateTime(),tmpStuId);
+                }
                 book.setBook(tmpBookId,tmpTitle,tmpAuthor,tmpPress,Integer.parseInt(tmpStatus),
-                        time,tmpCurId);
+                        null,tmpStuId);
                 // 修改数据
                 boolean isModify = UpdateBook.modifyBook(book);
                 if (isModify){
