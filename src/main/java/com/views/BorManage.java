@@ -55,7 +55,7 @@ public class BorManage extends Box {
                     JOptionPane.showMessageDialog(null, "请选择的修改的对象!");
                     return;
                 }
-                String value = table.getValueAt(selectdRow, 0).toString();
+                String value = table.getValueAt(selectdRow, 3).toString();
             }
         });
         // 添加按钮

@@ -46,7 +46,17 @@ public class BookManage extends Box {
                 }
             }
         });
-
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 返回选中的行号,没有选中返回-1
+                int selectdRow = table.getSelectedRow();
+                if (selectdRow == -1) {
+                    JOptionPane.showMessageDialog(null, "请选择的修改的对象!");
+                    return;
+                }
+            }
+        });
         // 添加按钮
         panel.add(addButton);
         panel.add(updateButton);
