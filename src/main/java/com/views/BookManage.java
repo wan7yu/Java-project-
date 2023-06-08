@@ -14,12 +14,11 @@ import java.sql.Statement;
 import java.util.Arrays;
 import java.util.Vector;
 
-
 public class BookManage extends Box {
     final int width = 850;
     final int hight = 600;
     // 标题
-    private String[] titles = new String[]{"图书编号", "书名", "作者", "出版社", "借阅状态", "借阅学生", "借阅时间"};
+    private String[] titles = new String[] { "图书编号", "书名", "作者", "出版社", "借阅状态", "借阅学生", "借阅时间" };
     private JTable table;
     private DefaultTableModel model;
     private Vector<String> columnName;
@@ -57,10 +56,10 @@ public class BookManage extends Box {
                 if (selectdRow != -1 && selectColumn != -1) {
                     String name = model.getColumnName(selectColumn);
                     String cell = (String) model.getValueAt(selectdRow, selectColumn);
-                    new main.java.com.views.AddBookModifyDialog(name,cell,jFrame,"修改图书",true);
+                    new main.java.com.views.AddBookModifyDialog(name, cell, jFrame, "修改图书", true);
 
                     model.setDataVector(main.java.com.service.QueryBook.queryAll(), toVector(titles));
-                }else {
+                } else {
                     JOptionPane.showMessageDialog(null, "请选择的修改的对象!");
                     return;
                 }
@@ -72,11 +71,11 @@ public class BookManage extends Box {
                 // 选中的行和列
                 int selectRow = table.getSelectedRow();
                 int selectColumn = table.getSelectedColumn();
-                if (selectRow != -1 && selectColumn!= -1){
+                if (selectRow != -1 && selectColumn != -1) {
                     int confirm = JOptionPane.showConfirmDialog(null, "确定要删除吗？",
                             "删除图书信息", JOptionPane.OK_CANCEL_OPTION);
                     // 确认要删除
-                    if (confirm==0){
+                    if (confirm == 0) {
                         // 删除对应数据
                         // 字段名
                         String columnName = model.getColumnName(selectColumn);
@@ -84,29 +83,28 @@ public class BookManage extends Box {
                         String cell = (String) model.getValueAt(selectRow, selectColumn);
                         System.out.println(cell);
                         System.out.println(columnName);
-                        if (!columnName.equals("借阅状态")){
+                        if (!columnName.equals("借阅状态")) {
                             columnName = ToColumnName.toColName(columnName);
                         } else {
                             JOptionPane.showMessageDialog(null,
-                                    "删除失败，请选择书中具有标识性的信息。","删除错误", JOptionPane.ERROR_MESSAGE);
+                                    "删除失败，请选择书中具有标识性的信息。", "删除错误", JOptionPane.ERROR_MESSAGE);
                             return;
                         }
                         try {
                             stmt = conn.createStatement();
-                            String sql = "DELETE FROM book WHERE "+columnName+"="+ "'" +cell+"' ;";
+                            String sql = "DELETE FROM book WHERE " + columnName + "=" + "'" + cell + "' ;";
                             int isDelete = stmt.executeUpdate(sql);
-                            if (isDelete!=0){
-                                JOptionPane.showMessageDialog(null,"删除成功");
-                            }else {
-                                JOptionPane.showMessageDialog(null,"删除失败");
+                            if (isDelete != 0) {
+                                JOptionPane.showMessageDialog(null, "删除成功");
+                            } else {
+                                JOptionPane.showMessageDialog(null, "删除失败");
                             }
                         } catch (SQLException ex) {
                             ex.printStackTrace();
                         }
                     }
-                }
-                else {
-                    JOptionPane.showMessageDialog(null,"请选择要删除的列！");
+                } else {
+                    JOptionPane.showMessageDialog(null, "请选择要删除的列！");
                     return;
                 }
                 // 刷新表格
@@ -127,8 +125,8 @@ public class BookManage extends Box {
         // 组装表格
         columnName = toVector(titles);
         tableData = main.java.com.service.QueryBook.queryAll();
-        model = new DefaultTableModel(tableData,columnName);
-        table = new JTable(model){
+        model = new DefaultTableModel(tableData, columnName);
+        table = new JTable(model) {
             // 不允许点击表格来修改数据
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -140,9 +138,11 @@ public class BookManage extends Box {
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.add(new JScrollPane(table));
     }
-    public Vector<String> toVector(String[] titles){
+
+    public Vector<String> toVector(String[] titles) {
         return new Vector<>(Arrays.asList(titles));
     }
+
     public String[] getTitles() {
         return titles;
     }
