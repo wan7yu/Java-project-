@@ -1,16 +1,15 @@
 package main.java.com.views;
 
-import main.java.com.service.EnterBook;
-import main.java.com.service.QueryBook;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Vector;
-
 import javax.swing.*;
+
+import main.java.com.service.EnterBook;
+import main.java.com.service.QueryBook;
 
 public class AddBookDialog extends JDialog {
 
@@ -98,12 +97,12 @@ public class AddBookDialog extends JDialog {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int isOk = JOptionPane.showConfirmDialog(null, "确认添加", "添加图书信息"
-                        , JOptionPane.OK_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE);
+                int isOk = JOptionPane.showConfirmDialog(null, "确认添加", "添加图书信息", JOptionPane.OK_CANCEL_OPTION,
+                        JOptionPane.INFORMATION_MESSAGE);
                 // 如果确认要添加，需要获取数据
                 // 调用entryBook方法，同时刷新表格。
                 if (isOk == 0) {
-                    String[] name = new String[]{"图书编号", "书名", "作者", "出版社", "借阅状态", "借阅学生", "借阅时间"};
+                    String[] name = new String[] { "图书编号", "书名", "作者", "出版社", "借阅状态", "借阅学生", "借阅时间" };
                     Vector<String> columnName = new Vector<String>(List.of(name));
                     String bookId = bookIdField.getText();
                     String bookTitle = titleField.getText();
@@ -111,7 +110,7 @@ public class AddBookDialog extends JDialog {
                     String press = pressField.getText();
                     String temStatus = statusField.getText();
                     int status = 0;
-                    if (!temStatus.equals("")){
+                    if (!temStatus.equals("")) {
                         status = Integer.parseInt(temStatus);
                     }
                     // 处理输入的时间 可能是 " "、2021 12 14、2021-12-14、2021:12:14

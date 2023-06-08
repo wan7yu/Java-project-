@@ -1,6 +1,6 @@
 package main.java.com.views;
 
-import LibMangeSystem.src.main.java.util.ToColumnName;
+import main.java.util.ToColumnName;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

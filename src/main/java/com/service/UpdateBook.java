@@ -1,4 +1,4 @@
-package LibMangeSystem.src.main.java.com.service;
+package main.java.com.service;
 
 import main.java.com.model.Book;
 
@@ -37,7 +37,7 @@ public class UpdateBook {
             ptmt.setInt(5, status);
             ptmt.setTimestamp(6, timestamp);
             ptmt.setString(7, userId);
-            ptmt.setString(8,bookId);
+            ptmt.setString(8, bookId);
             rows = ptmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

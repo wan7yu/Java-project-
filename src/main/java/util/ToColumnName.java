@@ -1,4 +1,4 @@
-package LibMangeSystem.src.main.java.util;
+package main.java.util;
 
 public class ToColumnName {
     public static String toColName(String Name) {
@@ -10,7 +10,7 @@ public class ToColumnName {
             return "author";
         } else if (Name.equals("出版社")) {
             return "press";
-        } else if (Name.equals("借阅学生")){
+        } else if (Name.equals("借阅学生")) {
             return "userId";
         } else if (Name.equals("借阅时间"))
             return "curTime";

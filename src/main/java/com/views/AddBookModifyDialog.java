@@ -1,8 +1,5 @@
 package main.java.com.views;
 
-import LibMangeSystem.src.main.java.com.service.UpdateBook;
-import LibMangeSystem.src.main.java.util.ToColumnName;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,16 +7,19 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Locale;
 
-public class AddBookModifyDialog extends JDialog {
+import main.java.util.ToColumnName;
+import main.java.com.service.UpdateBook;
+import main.java.util.ToColumnName;
 
+public class AddBookModifyDialog extends JDialog {
 
     public AddBookModifyDialog(String columnName, String cell, JFrame jFrame, String title, Boolean isMode) {
         super(jFrame, title, isMode);
         // 转换为数据库中字段
         String Name = ToColumnName.toColName(columnName);
-        main.java.com.model.Book book  = main.java.com.service.QueryBook.queryModifyBook(Name, cell);
+        main.java.com.model.Book book = main.java.com.service.QueryBook.queryModifyBook(Name, cell);
         // 如果未查到就提示查询失败
-        if (book==null) {
+        if (book == null) {
             JOptionPane.showMessageDialog(null, "查询信息失败");
             return;
         }
@@ -88,11 +88,9 @@ public class AddBookModifyDialog extends JDialog {
         JTextField curTimeField = new JTextField();
         LocalDateTime curTime = book.getCurTime();
         // 如果为空，不设置（空）
-        if (curTime!=null){
+        if (curTime != null) {
             curTimeField.setText(String.valueOf(curTime));
         }
-
-
 
         // 横向容器添加
         curTimeBox.add(curTimeJLabel);
@@ -125,16 +123,15 @@ public class AddBookModifyDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 弹出弹框
-                JOptionPane.showConfirmDialog(null,"是否修改？"
-                ,"修改图书信息",JOptionPane.OK_CANCEL_OPTION);
+                JOptionPane.showConfirmDialog(null, "是否修改？", "修改图书信息", JOptionPane.OK_CANCEL_OPTION);
                 // 获取所有的文本
                 String tmpBookId = bookIdField.getText();
                 String tmpTitle = titleField.getText();
                 String tmpAuthor = authorField.getText();
                 String tmpPress = pressField.getText();
                 String tmpStatus = statusField.getText();
-                int status=0;
-                if (!tmpStatus.equals("")){
+                int status = 0;
+                if (!tmpStatus.equals("")) {
                     status = Integer.parseInt(tmpStatus);
                 }
                 // 处理输入的时间 可能是 " "、2021 12 14、2021-12-14、2021:12:14
@@ -156,19 +153,17 @@ public class AddBookModifyDialog extends JDialog {
                 }
                 String tmpStuId = curStuIdField.getText();
                 if (curTime != null) {
-                    book.setBook(tmpBookId,tmpTitle,tmpAuthor,tmpPress,Integer.parseInt(tmpStatus),
-                            curTime.toLocalDateTime(),tmpStuId);
+                    book.setBook(tmpBookId, tmpTitle, tmpAuthor, tmpPress, Integer.parseInt(tmpStatus),
+                            curTime.toLocalDateTime(), tmpStuId);
                 }
-                book.setBook(tmpBookId,tmpTitle,tmpAuthor,tmpPress,Integer.parseInt(tmpStatus),
-                        null,tmpStuId);
+                book.setBook(tmpBookId, tmpTitle, tmpAuthor, tmpPress, Integer.parseInt(tmpStatus),
+                        null, tmpStuId);
                 // 修改数据
                 boolean isModify = UpdateBook.modifyBook(book);
-                if (isModify){
-                    JOptionPane.showMessageDialog(null,"修改成功"
-                            ,"修改图书信息",JOptionPane.INFORMATION_MESSAGE);
+                if (isModify) {
+                    JOptionPane.showMessageDialog(null, "修改成功", "修改图书信息", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(null,"修改失败"
-                    ,"修改图书信息",JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "修改失败", "修改图书信息", JOptionPane.WARNING_MESSAGE);
                 }
             }
         });
