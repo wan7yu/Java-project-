@@ -10,8 +10,11 @@ import javax.swing.*;
 
 import main.java.com.service.EnterBook;
 import main.java.com.service.QueryBook;
+import main.java.util.ScreenSize;
 
 public class AddBookDialog extends JDialog {
+    final int width = 600;
+    final int height = 450;
 
     public AddBookDialog(JFrame jFrame, String title, Boolean isMode) {
         super(jFrame, title, isMode);
@@ -180,7 +183,9 @@ public class AddBookDialog extends JDialog {
         hBox.add(vBox);
         hBox.add(Box.createHorizontalStrut(50));
         // 添加自定义容器
-        this.setBounds(150, 100, 600, 450);
         this.add(hBox);
+        this.setBounds((ScreenSize.getScreenWidth() - width) / 2, (ScreenSize.getScreenHeight() - height) / 2,
+                width, height);
+        this.setVisible(true);
     }
 }

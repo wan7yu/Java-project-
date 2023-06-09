@@ -5,13 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Locale;
 
-import main.java.util.ToColumnName;
+import main.java.util.*;
 import main.java.com.service.UpdateBook;
-import main.java.util.ToColumnName;
 
 public class AddBookModifyDialog extends JDialog {
+    final int width = 600;
+    final int height = 450;
 
     public AddBookModifyDialog(String columnName, String cell, JFrame jFrame, String title, Boolean isMode) {
         super(jFrame, title, isMode);
@@ -199,8 +199,9 @@ public class AddBookModifyDialog extends JDialog {
         hBox.add(vBox);
         hBox.add(Box.createHorizontalStrut(50));
         // 添加自定义容器
-        this.setBounds(150, 100, 600, 450);
         this.add(hBox);
+        this.setBounds((ScreenSize.getScreenWidth() - width) / 2, (ScreenSize.getScreenHeight() - height) / 2,
+                width, height);
         this.setVisible(true);
     }
 }

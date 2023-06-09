@@ -5,7 +5,11 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
 
+import main.java.util.ScreenSize;
+
 public class Mune {
+    final int width = 700;
+    final int height = 550;
 
     // 创建窗口
     private static JFrame systFrame = new JFrame("豫章图书馆");
@@ -83,10 +87,9 @@ public class Mune {
         // 添加分割面板
         systFrame.add(splitPane);
 
-        // systFrame.add(panel);
-        // systFrame.setBounds((1500 - width) / 2, (800 - height) / 2, width, height);
         // systFrame.setResizable(false);
-        systFrame.pack();
+        systFrame.setBounds((ScreenSize.getScreenWidth() - width) / 2, (ScreenSize.getScreenHeight() - height) / 2,
+                width, height);
         systFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         systFrame.setVisible(true);
     }

@@ -7,9 +7,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-
+import main.java.util.ScreenSize;
 
 public class AddBorDialog extends JDialog {
+    final int width = 400;
+    final int height = 250;
 
     public AddBorDialog(JFrame jFrame, String title, Boolean isModel) {
         super(jFrame, title, isModel);
@@ -118,5 +120,8 @@ public class AddBorDialog extends JDialog {
         hBox.add(Box.createHorizontalStrut(50));
         // 添加自定义容器
         this.add(hBox);
+        this.setBounds((ScreenSize.getScreenWidth() - width) / 2, (ScreenSize.getScreenHeight() - height) / 2, width,
+                height);
+        this.setVisible(true);
     }
 }

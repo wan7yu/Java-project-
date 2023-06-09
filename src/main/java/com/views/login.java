@@ -3,6 +3,8 @@ package main.java.com.views;
 import javax.swing.*;
 import java.awt.event.*;
 
+import main.java.util.ScreenSize;
+
 public class login {
     // 创建面板
     private JFrame loginFrame = new JFrame("豫章图书馆");
@@ -77,7 +79,8 @@ public class login {
         // 窗口添加容器
         panel.add(vBox);
         loginFrame.add(panel);
-        loginFrame.setBounds((1500 - width) / 2, (800 - height) / 2, width, height);
+        loginFrame.setBounds((ScreenSize.getScreenWidth() - width) / 2, (ScreenSize.getScreenHeight() - height) / 2,
+                width, height);
         // 设置不允许改窗口大小
         loginFrame.setResizable(false);
         loginFrame.setVisible(true);
