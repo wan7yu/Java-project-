@@ -68,7 +68,7 @@ public class Mune {
                 Object lastPathCompoent = e.getNewLeadSelectionPath().getLastPathComponent();
 
                 if (userManage.equals(lastPathCompoent)) {
-                    splitPane.setRightComponent(new BookManage(systFrame));
+                    splitPane.setRightComponent(new UserManage(systFrame));
                     splitPane.setDividerLocation(150);
                 } else if (bookManage.equals(lastPathCompoent)) {
                     splitPane.setRightComponent(new BookManage(systFrame));

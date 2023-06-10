@@ -1,12 +1,12 @@
 package main.java.com.service;
 
+import main.java.Setting;
 import main.java.com.model.Book;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 
 public class UpdateBook {
-    private static Connection conn = main.java.Setting.conMySql();
 
     public static boolean modifyBook(Book book) {
         String bookId = book.getBookId();
@@ -17,6 +17,7 @@ public class UpdateBook {
         LocalDateTime curTime = book.getCurTime();
         String userId = book.getUserId();
 
+        Connection conn = null;
         Timestamp timestamp;
         if (curTime == null) {
             timestamp = null;
@@ -25,6 +26,8 @@ public class UpdateBook {
         }
         int rows = 0;
         try {
+            // 连接数据库
+            conn = Setting.conMySql();
             PreparedStatement ptmt = null;
             String sql = "update book set bookId = ?, bookTitle = ?, author = ?, " +
                     "press = ?, status = ?, curTime = ?, userId = ? " +

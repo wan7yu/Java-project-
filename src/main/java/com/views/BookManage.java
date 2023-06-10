@@ -1,30 +1,27 @@
 package main.java.com.views;
 
-import main.java.util.ToColumnName;
-
+import java.sql.*;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 
-import main.java.util.Table;
+import main.java.util.*;
 import main.java.com.service.*;
 
 public class BookManage extends Box {
-
     final int width = 850;
     final int hight = 600;
-    private Connection conn = main.java.Setting.conMySql();
     // 标题
     private String[] titles = new String[] { "图书编号", "书名", "作者", "出版社", "借阅状态", "借阅学生", "借阅时间" };
-    private JTable Jtable;
+    private JTable table;
     private DefaultTableModel model;
+    private Vector<String> columnName;
+    private Vector<Vector<String>> tableData;
+    private Connection conn = main.java.Setting.conMySql();
     private Statement stmt;
-    private Table table = new Table();
     private Query inquire = new QueryBook();
 
     public BookManage(JFrame jFrame) {
@@ -42,9 +39,9 @@ public class BookManage extends Box {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddBookDialog(jFrame, "添加图书", true).setVisible(true);
+                new main.java.com.views.AddBookDialog(jFrame, "添加图书", true).setVisible(true);
                 // 刷新表格
-                model.setDataVector(inquire.query(), table.toVector(titles));
+                model.setDataVector(inquire.query(), toVector(titles));
             }
         });
 
@@ -52,17 +49,16 @@ public class BookManage extends Box {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 返回选中的行号以及对应列,没有选中返回-1
-                int selectdRow = Jtable.getSelectedRow();
-                int selectColumn = Jtable.getSelectedColumn();
+                int selectdRow = table.getSelectedRow();
+                int selectColumn = table.getSelectedColumn();
                 if (selectdRow != -1 && selectColumn != -1) {
                     String name = model.getColumnName(selectColumn);
                     String cell = (String) model.getValueAt(selectdRow, selectColumn);
-                    new AddBookModifyDialog(name, cell, jFrame, "修改图书", true);
+                    new main.java.com.views.AddBookModifyDialog(name, cell, jFrame, "修改图书", true);
 
-                    model.setDataVector(inquire.query(), table.toVector(titles));
+                    model.setDataVector(inquire.query(), toVector(titles));
                 } else {
                     JOptionPane.showMessageDialog(null, "请选择的修改的对象!");
-                    return;
                 }
             }
         });
@@ -70,8 +66,8 @@ public class BookManage extends Box {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 选中的行和列
-                int selectRow = Jtable.getSelectedRow();
-                int selectColumn = Jtable.getSelectedColumn();
+                int selectRow = table.getSelectedRow();
+                int selectColumn = table.getSelectedColumn();
                 if (selectRow != -1 && selectColumn != -1) {
                     int confirm = JOptionPane.showConfirmDialog(null, "确定要删除吗？",
                             "删除图书信息", JOptionPane.OK_CANCEL_OPTION);
@@ -106,10 +102,9 @@ public class BookManage extends Box {
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "请选择要删除的列！");
-                    return;
                 }
                 // 刷新表格
-                model.setDataVector(inquire.query(), table.toVector(titles));
+                model.setDataVector(inquire.query(), toVector(titles));
             }
         });
 
@@ -119,7 +114,36 @@ public class BookManage extends Box {
         panel.add(deleteButton);
         // 添加panel
         this.add(panel);
+        initTable();
+    }
+
+    private void initTable() {
         // 组装表格
-        this.add(table.initTable(titles, inquire));
+        columnName = toVector(titles);
+        tableData = inquire.query();
+        model = new DefaultTableModel(tableData, columnName);
+        table = new JTable(model) {
+            // 不允许点击表格来修改数据
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        model.fireTableDataChanged();
+        // 只能单选
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.add(new JScrollPane(table));
+    }
+
+    public Vector<String> toVector(String[] titles) {
+        return new Vector<>(Arrays.asList(titles));
+    }
+
+    public String[] getTitles() {
+        return titles;
+    }
+
+    public void setTitles(String[] titles) {
+        this.titles = titles;
     }
 }

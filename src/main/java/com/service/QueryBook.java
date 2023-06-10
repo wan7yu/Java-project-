@@ -1,5 +1,6 @@
 package main.java.com.service;
 
+import main.java.Setting;
 import main.java.com.model.Book;
 
 import java.util.Vector;
@@ -11,9 +12,13 @@ public class QueryBook extends Query {
 
     // 查询所有图书
     public Vector<Vector<String>> query() {
+
         Vector<Vector<String>> dataList = new Vector<>();
+        Connection conn = null;
         ResultSet resultset = null;
         try {
+            // 连接数据库
+            conn = Setting.conMySql();
             Statement statement = conn.createStatement();
             String sql = "SELECT bookId,bookTitle,author,press,status,curTime,userId FROM book;";
             resultset = statement.executeQuery(sql);
@@ -57,8 +62,11 @@ public class QueryBook extends Query {
 
     public static Book queryModifyBook(String column, String cell) {
         Book book = new Book();
+        Connection conn = null;
         ResultSet rs;
         try {
+            // 连接数据库
+            conn = Setting.conMySql();
             Statement stmt = conn.createStatement();
             String sql = "SELECT bookId,bookTitle,author,press,status,curTime,userId FROM book WHERE " + column + "="
                     + "'" + cell + "';";

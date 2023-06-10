@@ -6,12 +6,15 @@ import main.java.com.model.User;
 import main.java.Setting;
 
 public class EntryUser {
-    private static Connection conn = Setting.conMySql();
 
     public static Boolean entryStundet(User user) {
+
+        Connection conn = null;
         PreparedStatement pstmt = null;
         int rows = 0;
         try {
+            // 连接数据库
+            conn = Setting.conMySql();
             String sql = "INSERT INTO user(userId,password,name,borNum) VALUES(?,?,?,?)";
             // 开始录入
             pstmt = conn.prepareStatement(sql);

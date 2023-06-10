@@ -1,13 +1,13 @@
 package main.java.com.views;
 
 import java.time.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.*;
 
-import main.java.util.ScreenSize;
+import main.java.util.*;
+import main.java.com.model.*;
+import main.java.com.service.*;
 
 public class AddBorDialog extends JDialog {
     final int width = 400;
@@ -67,35 +67,38 @@ public class AddBorDialog extends JDialog {
                     // 获取当前时间
                     LocalDateTime curTime = LocalDateTime.now();
                     LocalDateTime endTime = curTime.plusDays(120);
-                    main.java.com.model.BorBook borBook = new main.java.com.model.BorBook();
-                    int user = main.java.util.Verify.isUser(userId, name);
+                    BorBook borBook = new BorBook();
+                    int user = Verify.getUserId(userId, name);
+                    String msg = null;
                     if (user == 0) {
-                        String msg = "用户不存在";
+                        msg = "用户不存在";
                         JOptionPane.showMessageDialog(null, msg);
                         return;
                     }
-                    int book = main.java.util.Verify.isBook(bookId);
+                    int book = Verify.getBookId(bookId);
                     if (book == 0) {
-                        String msg = "书籍不存在";
+                        msg = "书籍不存在或被借走";
                         JOptionPane.showMessageDialog(null, msg);
+                        return;
                     }
                     borBook.setBorBook(book, user, curTime, endTime);
-                    if (main.java.com.service.EnterBor.enterBor(borBook, bookId)) {
-                        JOptionPane.showMessageDialog(null, "添加成功!", "添加借阅记录", JOptionPane.INFORMATION_MESSAGE);
-                        dispose();
+                    if (EnterBor.enterBor(borBook, bookId)) {
+                        msg = "添加成功!";
+                        JOptionPane.showMessageDialog(null, msg, "添加借阅记录", JOptionPane.INFORMATION_MESSAGE);
                     } else {
-                        JOptionPane.showMessageDialog(null, "添加失败!", "添加借阅记录", JOptionPane.INFORMATION_MESSAGE);
+                        msg = "添加失败!";
+                        JOptionPane.showMessageDialog(null, msg, "添加借阅记录", JOptionPane.INFORMATION_MESSAGE);
+                        return;
                     }
-                } else if (isOk == 2) {
                 }
-
+                dispose();
             }
         });
 
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                dispose();
             }
         });
 

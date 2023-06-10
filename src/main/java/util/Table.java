@@ -9,8 +9,8 @@ import main.java.com.service.Query;
 public class Table {
 
     private String[] titles;
-    private JTable Jtable;
-    private DefaultTableModel model;
+    public JTable Jtable;
+    public DefaultTableModel model;
     private Vector<String> columnName;
     private Vector<Vector<String>> tableData;
 

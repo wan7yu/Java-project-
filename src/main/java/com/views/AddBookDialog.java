@@ -138,9 +138,8 @@ public class AddBookDialog extends JDialog {
                     } else {
                         JOptionPane.showMessageDialog(null, "添加失败");
                     }
-                } else {
-                    return;
                 }
+                dispose();
             }
         });
 
@@ -148,7 +147,7 @@ public class AddBookDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 直接隐藏界面
-                setVisible(false);
+                dispose();
             }
         });
 

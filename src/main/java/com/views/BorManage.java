@@ -1,5 +1,6 @@
 package main.java.com.views;
 
+import java.util.*;
 import javax.swing.*;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -7,7 +8,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.table.DefaultTableModel;
 
-import main.java.util.Table;
 import main.java.com.service.*;
 
 public class BorManage extends Box {
@@ -16,9 +16,10 @@ public class BorManage extends Box {
     final int hight = 600;
 
     private String[] titles = new String[] { "学号", "姓名", "书籍名称", "借阅时间", "归还限期" };
-    private JTable Jtable;
+    private JTable table;
     private DefaultTableModel model;
-    private Table table = new Table();
+    private Vector<String> columnName;
+    private Vector<Vector<String>> tableData;
     private Query inquire = new QueryBor();
 
     public BorManage(JFrame jFrame) {
@@ -31,49 +32,77 @@ public class BorManage extends Box {
 
         // 创建按钮
         JButton addButton = new JButton("添加");
-        JButton updateButton = new JButton("修改");
         JButton deleteButton = new JButton("删除");
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new main.java.com.views.AddBorDialog(jFrame, "添加图书", true).setVisible(true);
+                new AddBorDialog(jFrame, "添加图书", true).setVisible(true);
                 // 刷新表格
-                model.setDataVector(inquire.query(), table.toVector(titles));
-            }
-        });
-        updateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // 返回选中的行号,没有选中返回-1
-                int selectdRow = Jtable.getSelectedRow();
-                if (selectdRow == -1) {
-                    JOptionPane.showMessageDialog(null, "请选择的修改的对象!");
-                    return;
-                }
+                model.setDataVector(inquire.query(), toVector(titles));
             }
         });
         deleteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // 返回选中的行号,没有选中返回-1
-                int selectdRow = Jtable.getSelectedRow();
-                if (selectdRow == -1) {
-                    JOptionPane.showMessageDialog(null, "请选择的修改的对象!");
-                    return;
+                int selectdRow = table.getSelectedRow();
+                if (selectdRow != -1) {
+                    int confirm = JOptionPane.showConfirmDialog(null, "确定要删除吗？",
+                            "删除图书信息", JOptionPane.OK_CANCEL_OPTION);
+                    // 确认要删除
+                    if (confirm == 0) {
+                        String userId = table.getValueAt(selectdRow, 0).toString();
+                        String boolTitle = table.getValueAt(selectdRow, 2).toString();
+                        if (new DeleteBor().deleteBor(userId, boolTitle)) {
+                            JOptionPane.showMessageDialog(null, "删除成功");
+                            // 刷新表格
+                            model.setDataVector(inquire.query(), toVector(titles));
+                        } else {
+                            JOptionPane.showMessageDialog(null, "删除失败");
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "请选择需要删除的对象!");
                 }
-                String value = Jtable.getValueAt(selectdRow, 3).toString();
             }
         });
         // 添加按钮
         panel.add(addButton);
-        panel.add(updateButton);
         panel.add(deleteButton);
         // 添加panel
         this.add(panel);
         // 组装表格
+        initTable();
 
+    }
+
+    private void initTable() {
+        // 组装表格
+        columnName = toVector(titles);
+        tableData = inquire.query();
+        model = new DefaultTableModel(tableData, columnName);
+        table = new JTable(model) {
+            // 不允许点击表格来修改数据
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        model.fireTableDataChanged();
         // 只能单选
-        Jtable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.add(new JScrollPane(Jtable));
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        this.add(new JScrollPane(table));
+    }
+
+    public Vector<String> toVector(String[] titles) {
+        return new Vector<>(Arrays.asList(titles));
+    }
+
+    public String[] getTitles() {
+        return titles;
+    }
+
+    public void setTitles(String[] titles) {
+        this.titles = titles;
     }
 }

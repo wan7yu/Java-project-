@@ -3,14 +3,20 @@ package main.java.com.service;
 import java.sql.*;
 import java.util.Vector;
 
+import main.java.Setting;
+
 public class QueryUser extends Query {
 
     public Vector<Vector<String>> query() {
+
         // 创建一个可变的二维数组;
         Vector<Vector<String>> dataList = new Vector<>();
+        Connection conn = null;
         ResultSet resultset = null;
 
         try {
+            // 连接数据库
+            conn = Setting.conMySql();
             Statement statement = conn.createStatement();
             String sql = "select userId,password,name,borNum from user";
             resultset = statement.executeQuery(sql);

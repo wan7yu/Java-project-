@@ -3,13 +3,19 @@ package main.java.com.service;
 import java.sql.*;
 import java.util.Vector;
 
+import main.java.Setting;
+
 public class QueryBor extends Query {
 
     public Vector<Vector<String>> query() {
+
         // 创建一个可变的二维数组;
         Vector<Vector<String>> dataList = new Vector<>();
+        Connection conn = null;
         ResultSet resultset = null;
         try {
+            // 连接数据库
+            conn = Setting.conMySql();
             Statement statement = conn.createStatement();
             String sql = "SELECT u.userId, u.name, b.bookTitle, bb.curTime,bb.endTime FROM borBook bb JOIN user u ON bb.userId = u.id JOIN book b ON bb.bookId = b.id;";
             resultset = statement.executeQuery(sql);
