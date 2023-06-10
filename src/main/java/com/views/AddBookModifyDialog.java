@@ -7,7 +7,8 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 import main.java.util.*;
-import main.java.com.service.UpdateBook;
+import main.java.com.model.*;
+import main.java.com.service.*;
 
 public class AddBookModifyDialog extends JDialog {
     final int width = 600;
@@ -17,7 +18,7 @@ public class AddBookModifyDialog extends JDialog {
         super(jFrame, title, isMode);
         // 转换为数据库中字段
         String Name = ToColumnName.toColName(columnName);
-        main.java.com.model.Book book = main.java.com.service.QueryBook.queryModifyBook(Name, cell);
+        Book book = QueryBook.queryModifyBook(Name, cell);
         // 如果未查到就提示查询失败
         if (book == null) {
             JOptionPane.showMessageDialog(null, "查询信息失败");

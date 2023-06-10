@@ -3,12 +3,9 @@ package main.java.com.service;
 import java.sql.*;
 import java.util.Vector;
 
-import main.java.Setting;
+public class QueryBor extends Query {
 
-public class QueryBor {
-    private static Connection conn = Setting.conMySql();
-
-    public static Vector<Vector<String>> borUserQuery() {
+    public Vector<Vector<String>> query() {
         // 创建一个可变的二维数组;
         Vector<Vector<String>> dataList = new Vector<>();
         ResultSet resultset = null;

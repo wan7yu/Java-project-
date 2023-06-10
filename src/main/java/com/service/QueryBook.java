@@ -6,12 +6,11 @@ import java.util.Vector;
 
 import java.sql.*;
 
-public class QueryBook {
-    private static Connection conn = main.java.Setting.conMySql();
+public class QueryBook extends Query {
     public static Book book;
 
     // 查询所有图书
-    public static Vector<Vector<String>> queryAll() {
+    public Vector<Vector<String>> query() {
         Vector<Vector<String>> dataList = new Vector<>();
         ResultSet resultset = null;
         try {
@@ -55,14 +54,16 @@ public class QueryBook {
         }
         return dataList;
     }
-    public static Book queryModifyBook(String column,String cell){
+
+    public static Book queryModifyBook(String column, String cell) {
         Book book = new Book();
         ResultSet rs;
-        try{
-           Statement stmt = conn.createStatement();
-           String sql = "SELECT bookId,bookTitle,author,press,status,curTime,userId FROM book WHERE "+column+"="+"'"+cell+"';";
+        try {
+            Statement stmt = conn.createStatement();
+            String sql = "SELECT bookId,bookTitle,author,press,status,curTime,userId FROM book WHERE " + column + "="
+                    + "'" + cell + "';";
             rs = stmt.executeQuery(sql);
-            if (rs.next()){
+            if (rs.next()) {
                 book.setBookId(rs.getString("bookId"));
                 book.setBookTitle(rs.getString("bookTitle"));
                 book.setAuthor(rs.getString("author"));
@@ -71,13 +72,13 @@ public class QueryBook {
                 Timestamp temTime = rs.getTimestamp("curTime");
                 if (temTime != null) {
                     book.setCurTime(temTime.toLocalDateTime());
-                }else {
+                } else {
                     book.setCurTime(null);
                 }
                 book.setUserId(rs.getString("userId"));
             }
             return book;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return book;

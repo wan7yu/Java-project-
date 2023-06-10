@@ -68,19 +68,19 @@ public class Mune {
                 Object lastPathCompoent = e.getNewLeadSelectionPath().getLastPathComponent();
 
                 if (userManage.equals(lastPathCompoent)) {
-                    splitPane.setRightComponent(new main.java.com.views.UserManage(systFrame));
+                    splitPane.setRightComponent(new BookManage(systFrame));
                     splitPane.setDividerLocation(150);
                 } else if (bookManage.equals(lastPathCompoent)) {
-                    splitPane.setRightComponent(new main.java.com.views.BookManage(systFrame));
+                    splitPane.setRightComponent(new BookManage(systFrame));
                     splitPane.setDividerLocation(150);
                 } else if (borManage.equals(lastPathCompoent)) {
-                    splitPane.setRightComponent(new main.java.com.views.BorManage(systFrame));
+                    splitPane.setRightComponent(new BorManage(systFrame));
                     splitPane.setDividerLocation(150);
                 }
             }
         });
         // 选中树节点发生的事件
-        splitPane.setRightComponent(new main.java.com.views.BookManage(systFrame));
+        splitPane.setRightComponent(new BookManage(systFrame));
         // 添加树形结构
         splitPane.setLeftComponent(systemJTree);
 

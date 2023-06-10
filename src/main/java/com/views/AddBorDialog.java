@@ -71,12 +71,13 @@ public class AddBorDialog extends JDialog {
                     int user = main.java.util.Verify.isUser(userId, name);
                     if (user == 0) {
                         String msg = "用户不存在";
-                        System.out.println(msg);
+                        JOptionPane.showMessageDialog(null, msg);
+                        return;
                     }
                     int book = main.java.util.Verify.isBook(bookId);
                     if (book == 0) {
                         String msg = "书籍不存在";
-                        System.out.println(msg);
+                        JOptionPane.showMessageDialog(null, msg);
                     }
                     borBook.setBorBook(book, user, curTime, endTime);
                     if (main.java.com.service.EnterBor.enterBor(borBook, bookId)) {
