@@ -7,7 +7,7 @@ public class User {
     private int borNum;
 
     // set方法
-    public void setBook(String userId, String password, String name, int borNum) {
+    public void setUser(String userId, String password, String name, int borNum) {
         this.userId = userId;
         this.password = password;
         this.name = name;

@@ -39,7 +39,7 @@ public class UserManage extends Box {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new AddBorDialog(jFrame, "添加用户", true).setVisible(true);
+                new AddUserDialog(jFrame, "添加用户", true).setVisible(true);
                 // 刷新表格
                 model.setDataVector(inquire.query(), toVector(titles));
             }

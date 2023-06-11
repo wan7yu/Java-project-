@@ -7,7 +7,7 @@ import main.java.Setting;
 
 public class EntryUser {
 
-    public static Boolean entryStundet(User user) {
+    public static Boolean entryUser(User user) {
 
         Connection conn = null;
         PreparedStatement pstmt = null;
