@@ -10,6 +10,7 @@ import java.util.Vector;
 
 import javax.swing.table.DefaultTableModel;
 
+import main.java.com.model.User;
 import main.java.com.service.*;
 
 public class UserManage extends Box {
@@ -42,6 +43,50 @@ public class UserManage extends Box {
                 new AddUserDialog(jFrame, "添加用户", true).setVisible(true);
                 // 刷新表格
                 model.setDataVector(inquire.query(), toVector(titles));
+            }
+        });
+        updateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 返回选中的行号,没有选中返回-1
+                int selectdRow = table.getSelectedRow();
+                if (selectdRow != -1) {
+                    String userId = table.getValueAt(selectdRow, 0).toString();
+                    String password = table.getValueAt(selectdRow, 1).toString();
+                    String name = table.getValueAt(selectdRow, 2).toString();
+                    String borNum = table.getValueAt(selectdRow, 3).toString();
+                    User user = new User();
+                    user.setUser(userId, password, name, Integer.parseInt(borNum));
+                    new AddUserModifyDialog(jFrame, "修改用户", true, user);
+                    // 刷新表格
+                    model.setDataVector(inquire.query(), toVector(titles));
+                } else {
+                    JOptionPane.showMessageDialog(null, "请选择的修改的对象!");
+                }
+            }
+        });
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // 返回选中的行号,没有选中返回-1
+                int selectdRow = table.getSelectedRow();
+                if (selectdRow != -1) {
+                    int confirm = JOptionPane.showConfirmDialog(null, "确定要删除吗？",
+                            "删除用户信息", JOptionPane.OK_CANCEL_OPTION);
+                    // 确认要删除
+                    if (confirm == 0) {
+                        String userId = table.getValueAt(selectdRow, 0).toString();
+                        if (new DeleteUser().deleteUser(userId)) {
+                            JOptionPane.showMessageDialog(null, "删除成功");
+                            // 刷新表格
+                            model.setDataVector(inquire.query(), toVector(titles));
+                        } else {
+                            JOptionPane.showMessageDialog(null, "删除失败");
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "请选择需要删除的对象!");
+                }
             }
         });
 
