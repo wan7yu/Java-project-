@@ -3,6 +3,8 @@ package main.java.com.views;
 import javax.swing.*;
 import java.awt.event.*;
 
+import main.Manage;
+import main.java.com.service.Login;
 import main.java.util.ScreenSize;
 
 public class login {
@@ -50,8 +52,15 @@ public class login {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // 关闭当前窗口
-                loginFrame.dispose();
+                String userId = unField.getText().trim();
+                String password = pwField.getText().trim();
+                if (Login.login(userId, Integer.parseInt(password))) {
+                    new Mune().init();
+                    loginFrame.dispose();
+                } else {
+                    String msg = "用户名或者密码错误!";
+                    JOptionPane.showMessageDialog(null, msg);
+                }
             }
         });
 

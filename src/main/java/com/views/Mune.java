@@ -93,8 +93,4 @@ public class Mune {
         systFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         systFrame.setVisible(true);
     }
-
-    public static void main(String[] args) {
-        new Mune().init();
-    }
 }
