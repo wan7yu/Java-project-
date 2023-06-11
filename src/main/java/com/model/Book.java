@@ -69,8 +69,12 @@ public class Book {
         return this.press;
     }
 
-    public String getStatus() {
+    public String getStringStatus() {
         return String.valueOf(this.status);
+    }
+
+    public int getStatus() {
+        return this.status;
     }
 
     public String getBorTime() {

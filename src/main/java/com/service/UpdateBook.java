@@ -13,7 +13,7 @@ public class UpdateBook {
         String bookTitle = book.getBookTitle();
         String author = book.getAuthor();
         String press = book.getPress();
-        int status = Integer.parseInt(book.getStatus());
+        int status = book.getStatus();
         LocalDateTime curTime = book.getCurTime();
         String userId = book.getUserId();
 

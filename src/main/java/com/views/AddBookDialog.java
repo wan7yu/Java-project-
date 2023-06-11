@@ -2,17 +2,15 @@ package main.java.com.views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Timestamp;
-import java.util.List;
-import java.util.Vector;
 import javax.swing.*;
 
+import main.java.com.model.Book;
 import main.java.com.service.*;
 import main.java.util.ScreenSize;
 
 public class AddBookDialog extends JDialog {
-    final int width = 600;
-    final int height = 450;
+    final int width = 400;
+    final int height = 300;
 
     public AddBookDialog(JFrame jFrame, String title, Boolean isMode) {
         super(jFrame, title, isMode);
@@ -60,36 +58,6 @@ public class AddBookDialog extends JDialog {
         pressBox.add(Box.createHorizontalStrut(20));
         pressBox.add(pressField);
 
-        // 创建横向容器和创建password标签和输入框
-        Box statusBox = Box.createHorizontalBox();
-        JLabel statusJLabel = new JLabel("借阅状态: ");
-        JTextField statusField = new JTextField();
-
-        // 横向容器添加
-        statusBox.add(statusJLabel);
-        statusBox.add(Box.createHorizontalStrut(20));
-        statusBox.add(statusField);
-
-        // 创建横向容器和创建password标签和输入框
-        Box curTimeBox = Box.createHorizontalBox();
-        JLabel curTimeJLabel = new JLabel("借阅时间: ");
-        JTextField curTimeField = new JTextField();
-
-        // 横向容器添加
-        curTimeBox.add(curTimeJLabel);
-        curTimeBox.add(Box.createHorizontalStrut(20));
-        curTimeBox.add(curTimeField);
-
-        // 创建横向容器和创建password标签和输入框
-        Box curStuIdBox = Box.createHorizontalBox();
-        JLabel curStuIdJLabel = new JLabel("借阅学生: ");
-        JTextField curStuIdField = new JTextField();
-
-        // 横向容器添加
-        curStuIdBox.add(curStuIdJLabel);
-        curStuIdBox.add(Box.createHorizontalStrut(20));
-        curStuIdBox.add(curStuIdField);
-
         // 创建横向容器和创建按钮
         Box bBox = Box.createHorizontalBox();
         JButton confirmButton = new JButton("确认");
@@ -103,36 +71,19 @@ public class AddBookDialog extends JDialog {
                 // 如果确认要添加，需要获取数据
                 // 调用entryBook方法，同时刷新表格。
                 if (isOk == 0) {
-                    String[] name = new String[] { "图书编号", "书名", "作者", "出版社", "借阅状态", "借阅学生", "借阅时间" };
-                    Vector<String> columnName = new Vector<String>(List.of(name));
                     String bookId = bookIdField.getText();
                     String bookTitle = titleField.getText();
                     String author = authorField.getText();
                     String press = pressField.getText();
-                    String temStatus = statusField.getText();
-                    int status = 0;
-                    if (!temStatus.equals("")) {
-                        status = Integer.parseInt(temStatus);
-                    }
-                    // 处理输入的时间 可能是 " "、2021 12 14、2021-12-14、2021:12:14
-                    String s = curTimeField.getText();
-                    Timestamp curTime = null;
                     // 处理非法数据
                     if (bookId.equals("") || bookTitle.equals("") || author.equals("")
                             || press.equals("")) {
                         JOptionPane.showMessageDialog(null, "输入数据有误！");
                         return;
                     }
-                    if (!s.equals("") && status != 0) {
-                        boolean isTime = s.matches("([01]\\d|2[0-3])([:\\-]?)[0-5]\\d([:\\-]?)[0-5]\\d");
-                        // 如果满足格式
-                        if (isTime) {
-                            s = s.replaceAll("\\D|\\|:", "-");
-                            curTime = Timestamp.valueOf(s);
-                        }
-                    }
-                    String stuID = curStuIdField.getText();
-                    boolean isAdd = EnterBook.entryBook(bookId, bookTitle, author, press, status, curTime, stuID);
+                    Book book = new Book();
+                    book.setBook(bookId, bookTitle, author, press, 0, null, null);
+                    boolean isAdd = EnterBook.entryBook(book);
                     if (isAdd) {
                         JOptionPane.showMessageDialog(null, "添加成功");
                     } else {
@@ -164,12 +115,6 @@ public class AddBookDialog extends JDialog {
         vBox.add(authorBox);
         vBox.add(Box.createVerticalStrut(10));
         vBox.add(pressBox);
-        vBox.add(Box.createVerticalStrut(10));
-        vBox.add(statusBox);
-        vBox.add(Box.createVerticalStrut(10));
-        vBox.add(curTimeBox);
-        vBox.add(Box.createVerticalStrut(10));
-        vBox.add(curStuIdBox);
         vBox.add(Box.createVerticalStrut(20));
         vBox.add(bBox);
         vBox.add(Box.createVerticalStrut(20));

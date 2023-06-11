@@ -76,7 +76,7 @@ public class AddBookModifyDialog extends JDialog {
         Box statusBox = Box.createHorizontalBox();
         JLabel statusJLabel = new JLabel("借阅状态: ");
         JTextField statusField = new JTextField();
-        statusField.setText(book.getStatus());
+        statusField.setText(book.getStringStatus());
 
         // 横向容器添加
         statusBox.add(statusJLabel);
